@@ -9,8 +9,8 @@
     "watch:server": "cd src/server && tsc -w",
     "build:client": "cd src/client && tsc",
     "watch:client": "cd src/client && tsc -w",
-    "build:cef": "cd ../cef && vite build",
-    "dev:cef": "cd ../cef && vite",
+    "build:cef": "cd cef && vite build",
+    "dev:cef": "cd cef && vite",
     "build:all": "npm run build:server && npm run build:client && npm run build:cef"
   },
   "keywords": [],
