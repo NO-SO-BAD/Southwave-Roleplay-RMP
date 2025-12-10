@@ -4,3 +4,5 @@ mp.events.addCommand('heal', (player: PlayerMp) => {  // PlayerMp ya está dispo
   player.health = 100;
   player.outputChatBox('¡HP restaurado!');
 });
+
+
