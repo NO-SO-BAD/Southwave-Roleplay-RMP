@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "../../client_packages/southwave-roleplay",
     "rootDir": "../../",   // ← Apunta a src/
-    "types": ["@ragempcommunity/types-client"]
+    "types": ["@ragempcommunity/types-client", "node"]
   },
   "include": [
     "src/**/*",

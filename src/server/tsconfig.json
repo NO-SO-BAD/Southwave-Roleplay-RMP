@@ -3,7 +3,7 @@
   "compilerOptions": {
     "outDir": "../../packages/southwave-roleplay",
     "rootDir": "../../",   // ← CLAVE: Apunta a la carpeta src/ (contiene shared, server y client)
-    "types": ["@ragempcommunity/types-server"]
+    "types": ["@ragempcommunity/types-server", "node"]
   },
   "include": [
     "src/**/*",              // Tus archivos server locales

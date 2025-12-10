@@ -19,6 +19,7 @@
   "devDependencies": {
     "@ragempcommunity/types-client": "^2.1.9",
     "@ragempcommunity/types-server": "^2.1.9",
+    "@types/node": "^25.0.0",
     "@vitejs/plugin-vue": "^6.0.2",
     "vite": "^7.2.7",
     "vue": "^3.5.25",
