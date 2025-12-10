@@ -1,0 +1,31 @@
+{
+  "name": "southwave-roleplay-rmp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:server": "cd src/server && tsc",
+    "watch:server": "cd src/server && tsc -w",
+    "build:client": "cd src/client && tsc",
+    "watch:client": "cd src/client && tsc -w",
+    "build:cef": "cd ../cef && vite build",
+    "dev:cef": "cd ../cef && vite",
+    "build:all": "npm run build:server && npm run build:client && npm run build:cef"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@ragempcommunity/types-client": "^2.1.9",
+    "@ragempcommunity/types-server": "^2.1.9",
+    "@vitejs/plugin-vue": "^6.0.2",
+    "vite": "^7.2.7",
+    "vue": "^3.5.25",
+    "vue-tsc": "^3.1.8"
+  },
+  "dependencies": {
+    "@vue/tsconfig": "^0.8.1",
+    "pinia": "^3.0.4"
+  }
+}
