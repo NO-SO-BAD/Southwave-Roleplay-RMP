@@ -4,10 +4,10 @@ import './modules/commands';
 import './modules/events';
 // src/server/src/index.ts
 
-import { logger } from '../../shared/utils/logger';  // ← Ruta correcta (3 niveles arriba)
+
 
 mp.events.add('playerJoin', (player: PlayerMp) => {
-  logger.info(`Jugador ${player.name} se unió.`);
+
   player.outputChatBox('¡Bienvenido a MyGamemode!');
 });
 

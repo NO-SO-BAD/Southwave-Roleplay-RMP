@@ -1,9 +1,11 @@
-{
+  { 
+  
   "files": [],  // No sources directas
   "references": [
     { "path": "./src/shared" },  // Ref a shared
     { "path": "./src/server" },
-    { "path": "./src/client" },
+    { "path": "./src/cl ient" },
     { "path": "./cef" }
+
   ]
 }
