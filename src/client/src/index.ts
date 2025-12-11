@@ -1,8 +1,9 @@
-import './modules/hud';
-import './modules/chat';
-import './modules/vehicles';
+import './modules/hud/index';
+import './modules/chat/index';
+import './modules/vehicles/index';
 import './player';
-import './discord'
+import './discord';
+import './config/index';
 mp.events.add('render', () => {
   mp.players.forEachInStreamRange((player: PlayerMp) => {
     if (player !== mp.players.local) {

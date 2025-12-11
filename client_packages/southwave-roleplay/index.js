@@ -1,9 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require("./modules/hud");
-require("./modules/chat");
-require("./modules/vehicles");
+require("./modules/hud/index");
+require("./modules/chat/index");
+require("./modules/vehicles/index");
 require("./player");
+require("./discord");
+require("./config/index");
 mp.events.add('render', function () {
     mp.players.forEachInStreamRange(function (player) {
         if (player !== mp.players.local) {
