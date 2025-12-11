@@ -3,7 +3,6 @@ import './modules/hud';
 import './modules/chat';
 import './modules/vehicles';
 import './player';
-import { logger } from '../../shared/utils/logger';  // Ruta relativa OK
 
 mp.events.add('render', () => {
   mp.players.forEachInStreamRange((player: PlayerMp) => {
@@ -34,5 +33,4 @@ mp.events.add('render', () => {
   });
 });
 
-logger.info('Client-side cargado con TypeScript.');
 console.log('Client-side cargado con TypeScript.');

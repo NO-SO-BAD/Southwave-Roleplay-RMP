@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
-    "target": "es5",
-    "module": "commonjs",
-    "lib": ["es2017", "dom"],
+    "target": "es2020",
+    "module": "commonjs",  // FIX: CommonJS (emite require/module.exports)
+    "moduleResolution": "node",
+    "lib": ["es2020", "dom"],
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true,
-    "declaration": false,          // ← Cambia a false
-    "declarationMap": false,       // ← Puedes quitarlo o dejar false
-    "ignoreDeprecations": "5.0"
+    "resolveJsonModule": true
   },
   "exclude": ["node_modules", "dist", "packages", "client_packages"]
 }
