@@ -4,9 +4,9 @@ require('./modules/auth');
 require('./modules/commands');
 require('./modules/events');
 require('./PlayerSpawn');
-var logger = require('./utils/logger');
+//const logger = require('./utils/logger');
 mp.events.add('playerJoin', function (player) {
-    logger.info("Jugador ".concat(player.name, " se uni\u00F3."));
+    //logger.info(`Jugador ${player.name} se unió.`);
     player.outputChatBox('¡Bienvenido a Southwave Roleplay!');
 });
 console.log('Server-side cargado con TypeScript.');

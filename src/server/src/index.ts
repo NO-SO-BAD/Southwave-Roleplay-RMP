@@ -4,10 +4,10 @@ require('./modules/commands');
 require('./modules/events');
 require('./PlayerSpawn');
 
-const logger = require('./utils/logger');
+//const logger = require('./utils/logger');
 
 mp.events.add('playerJoin', (player: PlayerMp) => {
-  logger.info(`Jugador ${player.name} se unió.`);
+  //logger.info(`Jugador ${player.name} se unió.`);
   player.outputChatBox('¡Bienvenido a Southwave Roleplay!');
 });
 
