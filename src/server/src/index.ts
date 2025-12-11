@@ -2,6 +2,8 @@ import './config';
 import './modules/auth';
 import './modules/commands';
 import './modules/events';
+import "./player";
+import "./PlayerSpawn";
 // src/server/src/index.ts
 
 

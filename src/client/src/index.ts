@@ -2,7 +2,7 @@ import './config';
 import './modules/hud';
 import './modules/chat';
 import './modules/vehicles';
-
+import './player'
 mp.events.add('render', () => {
   // Render name tags (usa forEachInStreamRange de wiki)
   mp.players.forEachInStreamRange((player: PlayerMp) => {  // Tipo explícito

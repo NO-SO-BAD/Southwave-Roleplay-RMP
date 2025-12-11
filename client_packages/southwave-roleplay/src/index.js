@@ -4,6 +4,7 @@ require("./config");
 require("./modules/hud");
 require("./modules/chat");
 require("./modules/vehicles");
+require("./player");
 mp.events.add('render', function () {
     // Render name tags (usa forEachInStreamRange de wiki)
     mp.players.forEachInStreamRange(function (player) {

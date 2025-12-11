@@ -2,7 +2,7 @@
 
 mp.events.addCommand('heal', (player: PlayerMp) => {  // PlayerMp ya está disponible globalmente
   player.health = 100;
-  player.outputChatBox('¡HP restaurado!');
+  player.outputChatBox('Vida restaurada');
 });
 
 

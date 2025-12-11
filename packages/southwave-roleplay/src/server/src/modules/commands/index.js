@@ -2,5 +2,5 @@
 // QUITA EL IMPORT
 mp.events.addCommand('heal', function (player) {
     player.health = 100;
-    player.outputChatBox('¡HP restaurado!');
+    player.outputChatBox('Vida restaurada');
 });
