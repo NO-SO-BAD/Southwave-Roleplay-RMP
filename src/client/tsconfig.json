@@ -2,7 +2,7 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "outDir": "../../client_packages/southwave-roleplay",
+    "outDir": "../../client_packages/southwave",
     "rootDir": "./src",
     "types": ["@ragempcommunity/types-client"],
     "esModuleInterop": true,

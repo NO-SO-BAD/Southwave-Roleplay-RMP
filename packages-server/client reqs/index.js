@@ -1,1 +1,0 @@
-require('../../client_packages/southwave-roleplay/index');
