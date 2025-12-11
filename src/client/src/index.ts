@@ -2,7 +2,7 @@ import './modules/hud';
 import './modules/chat';
 import './modules/vehicles';
 import './player';
-
+import './discord'
 mp.events.add('render', () => {
   mp.players.forEachInStreamRange((player: PlayerMp) => {
     if (player !== mp.players.local) {

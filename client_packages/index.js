@@ -1,0 +1,1 @@
+require('./southwave-roleplay/index');

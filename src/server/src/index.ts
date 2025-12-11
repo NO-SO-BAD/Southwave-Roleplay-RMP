@@ -3,7 +3,7 @@ require('./modules/auth');
 require('./modules/commands');
 require('./modules/events');
 require('./PlayerSpawn');
-
+require('./modules/chat');
 //const logger = require('./utils/logger');
 
 mp.events.add('playerJoin', (player: PlayerMp) => {
