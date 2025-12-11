@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2020",
-    "module": "commonjs",  // FIX: CommonJS (emite require/module.exports)
+    "module": "esnext",
     "moduleResolution": "node",
     "lib": ["es2020", "dom"],
     "strict": true,
