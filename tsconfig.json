@@ -1,11 +1,7 @@
-  { 
-  
-  "files": [],  // No sources directas
+{
+  "files": [],
   "references": [
-
     { "path": "./src/server" },
-    { "path": "./src/client" },
-    { "path": "./cef" }
-
+    { "path": "./src/client" }
   ]
 }

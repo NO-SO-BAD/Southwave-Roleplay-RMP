@@ -2,12 +2,11 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../../packages/southwave-roleplay",
-    "rootDir": "../../",   // ← CLAVE: Apunta a la carpeta src/ (contiene shared, server y client)
+    "rootDir": "./",                     // ⬅ SOLO server/src
     "types": ["@ragempcommunity/types-server", "node"]
   },
   "include": [
-    "src/**/*",              // Tus archivos server locales
-    "../../shared/**/*"      // Incluye explícitamente shared
-  ],
-  "exclude": ["../../client/**/*"]  // Opcional: evita incluir client por error
+    "./**/*",
+    "../../shared/**/*"
+  ]
 }
