@@ -1,5 +1,4 @@
 {
   "name": "southwave-roleplay",
-  "main": "index.js",
-  "type": "module" 
+  "main": "index.js"
 }
