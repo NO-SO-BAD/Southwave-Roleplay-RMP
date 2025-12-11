@@ -1,14 +1,18 @@
 {
   "compilerOptions": {
-    "target": "es2020",
-    "module": "esnext",
-    "moduleResolution": "node",
-    "lib": ["es2020", "dom"],
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es2017", "dom"],
+    "outDir": "./dist",
+    "rootDir": "./src",
     "strict": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "declaration": false,
+    "declarationMap": false
   },
-  "exclude": ["node_modules", "dist", "packages", "client_packages"]
+  "include": ["src/shared/**/*"],
+  "exclude": ["node_modules", "dist"]
 }

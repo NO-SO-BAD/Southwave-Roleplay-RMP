@@ -2,8 +2,8 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../../client_packages/southwave-roleplay",
-    "rootDir": "./src",
-    "types": ["@ragempcommunity/types-client"]
+    "rootDir": "./src",  // Apunta SOLO a src/client/src
+    "types": ["@ragempcommunity/types-client"]  // FIX: Tipos client-side (mp.players.local, mp.game, etc.)
   },
-  "include": ["src/**/*"]
+  "include": ["src/**/*"]  // Solo archivos dentro de src/client/src
 }

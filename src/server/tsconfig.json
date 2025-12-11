@@ -2,13 +2,8 @@
   "extends": "../../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../../packages/southwave-roleplay",
-    "rootDir": "..",  // Apunta a src/server/ (incluye src y shared)
-    "types": ["@ragempcommunity/types-server", "node"],
-    "module": "esnext",
-    "moduleResolution": "node"
+    "rootDir": "./src",  // FIX: Apunta SOLO a src/server/src (esto permite tipos globales)
+    "types": ["@ragempcommunity/types-server", "node"]
   },
-  "include": [
-    "src/**/*",
-    "shared/**/*"
-  ]
+  "include": ["src/**/*"]  // FIX: Solo archivos dentro de src/server/src
 }
