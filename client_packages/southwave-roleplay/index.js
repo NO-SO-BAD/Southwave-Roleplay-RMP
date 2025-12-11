@@ -1,13 +1,23 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 require("./config");
-require("./modules/auth");
-require("./modules/commands");
-require("./modules/events");
-var logger_1 = require("../../shared/utils/logger");
-// Inicialización server
-mp.events.add('playerJoin', function (player) {
-    logger_1.logger.info("Jugador ".concat(player.name, " se uni\u00F3."));
-    player.outputChatBox('¡Bienvenido a MyGamemode!');
+require("./modules/hud");
+require("./modules/chat");
+require("./modules/vehicles");
+require("./player");
+mp.events.add('render', function () {
+    // Render name tags (usa forEachInStreamRange de wiki)
+    mp.players.forEachInStreamRange(function (player) {
+        if (player !== mp.players.local) {
+            // Corrige: usa drawText (wiki: text, [x,y], options)
+            mp.game.graphics.drawText("".concat(player.name), [0.5, 0.5], // Posición screen (0-1)
+            {
+                font: 0, // e.g., ChaletLondon
+                color: [255, 255, 255, 255], // RGBA blanco
+                scale: [0.5, 0.5], // Tamaño
+                outline: true,
+            });
+        }
+    });
 });
-console.log('Server-side cargado con TypeScript.');
+console.log('Client-side cargado con TypeScript.');
