@@ -6,10 +6,16 @@
   "announce": true,
   "csharp": "disabled",
   "port": 22005,
+
   "voice": {
     "distance": 30.0
   },
-  "resources": [
+
+  "packages": [
+    "southwave-roleplay"
+  ],
+
+  "client-packages": [
     "southwave-roleplay"
   ]
 }

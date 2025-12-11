@@ -12,8 +12,9 @@
     "noEmitOnError": false,
     "removeComments": true,
     "noLib": false,
-    "isolatedModules": true,
-    "verbatimModuleSyntax": false
+
+    "isolatedModules": false,
+    "verbatimModuleSyntax": false  // ← FIX MÁS IMPORTANTE
   },
   "include": ["src/**/*"]
 }
