@@ -1,27 +1,25 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require("./modules/hud/index");
-require("./modules/chat/index");
-require("./modules/vehicles/index");
 require("./player");
 require("./discord");
-require("./config/index");
+mp.events.add('playerSpawn', function () {
+    mp.gui.chat.push('!{#00ff00}[Southwave RP] Cliente cargado 100%');
+    mp.gui.chat.push('!{#ffaa00}Name tags activados – Versión FINAL 2025');
+});
 mp.events.add('render', function () {
     mp.players.forEachInStreamRange(function (player) {
-        if (player !== mp.players.local) {
-            var headPos = player.getBoneCoords(12844, 0, 0, 0);
-            var screenPos = mp.game.graphics.world3dToScreen2d(new mp.Vector3(headPos.x, headPos.y, headPos.z + 0.2) // +0.2 para arriba de la cabeza
-            );
-            if (screenPos) {
-                mp.game.graphics.drawText(player.name, [screenPos.x, screenPos.y], {
-                    font: 4,
-                    color: [255, 255, 255, 255],
-                    scale: [0.4, 0.4],
-                    outline: true,
-                    centre: true
-                });
-            }
+        if (!player || player.handle === 0 || player === mp.players.local)
+            return;
+        var headPos = player.getBoneCoords(12844, 0, 0, 0);
+        var screen = mp.game.graphics.world3dToScreen2d(new mp.Vector3(headPos.x, headPos.y, headPos.z + 0.22));
+        if (screen) {
+            mp.game.graphics.drawText(player.name, [screen.x, screen.y], {
+                font: 4,
+                color: [255, 255, 255, 255],
+                scale: [0.38, 0.38],
+                outline: true,
+                centre: true
+            });
         }
     });
 });
-console.log('Client-side cargado con TypeScript.');

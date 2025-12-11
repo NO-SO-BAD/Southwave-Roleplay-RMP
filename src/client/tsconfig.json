@@ -1,9 +1,19 @@
 {
-  "extends": "../../tsconfig.base.json",
   "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
     "outDir": "../../client_packages/southwave-roleplay",
     "rootDir": "./src",
-    "types": ["@ragempcommunity/types-client"]  // Quita "node"
+    "types": ["@ragempcommunity/types-client"],
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "allowJs": false,
+    "noEmitOnError": false,
+    "removeComments": true,
+    "noLib": false,
+    "isolatedModules": true,
+    "verbatimModuleSyntax": false
   },
   "include": ["src/**/*"]
 }
