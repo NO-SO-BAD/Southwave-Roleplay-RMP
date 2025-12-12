@@ -1,5 +1,4 @@
-require('./player');
-require('./discord');
+
 
 // Mensajes de prueba
 mp.events.add('playerSpawn', () => {
@@ -32,4 +31,31 @@ mp.events.add('render', () => {
       );
     }
   });
+});
+
+
+
+// src/client/src/interiors.ts
+// Carga de IPLs (interiores) en el cliente – aquí SÍ existe mp.game
+
+const INTERIOR_IPLS = [
+  // Eclipse Tower Apartments (confirmados en wiki.rage.mp)
+  'apa_v_mp_h_01_a', 'apa_v_mp_h_01_b', 'apa_v_mp_h_01_c',
+  'apa_v_mp_h_02_a', 'apa_v_mp_h_02_b', 'apa_v_mp_h_02_c',
+  'apa_v_mp_h_03_a', 'apa_v_mp_h_03_b', 'apa_v_mp_h_03_c',
+  'apa_v_mp_h_04_a', 'apa_v_mp_h_04_b', 'apa_v_mp_h_04_c',
+  'apa_v_mp_h_08_a', 'apa_v_mp_h_08_b', 'apa_v_mp_h_08_c',
+
+  // Mansiones Dec 2025 (A Safehouse in the Hills) – IPLs no públicos aún (update muy nuevo)
+  // Usa estos placeholders basados en leaks/CodeWalker (prueba y ajusta)
+  'dlc_mansions_tongva_estate',
+  'dlc_mansions_richman_villa',
+  'dlc_mansions_vinewood_residence'
+];
+
+mp.events.add('playerReady', () => {
+  INTERIOR_IPLS.forEach(ipl => {
+    mp.game.streaming.requestIpl(ipl);  // API CORRECTA client-side (wiki.rage.mp)
+  });
+  console.log('[Cliente] Interiores cargados: Eclipse Tower + Mansiones 2025');
 });

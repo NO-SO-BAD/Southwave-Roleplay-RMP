@@ -59,7 +59,7 @@ const allBlips: BlipData[] = [
         name: "Estacion de policia",
         x: pos[0], y: pos[1], z: pos[2],
         sprite: 60,
-        color: 2,
+        color: 40,
         scale: 0.85,
         shortRange: false
     })) ),
@@ -71,7 +71,7 @@ const allBlips: BlipData[] = [
         name: "Concesionario",
         x: pos[0], y: pos[1], z: pos[2],
         sprite: 810,
-        color: 2,
+        color: 40,
         scale: 0.85,
         shortRange: false
     })) )

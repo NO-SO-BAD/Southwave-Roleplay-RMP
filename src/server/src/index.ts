@@ -5,7 +5,7 @@ import './modules/events';
 import './PlayerSpawn';
 import './modules/chat';
 import { createAllBlipsForPlayer } from './map-blips';  // Importa tu función de blips
-
+import './interiors';
 mp.events.add('playerJoin', (player: PlayerMp) => {
   player.outputChatBox('¡Bienvenido a Southwave Roleplay!');
 });
