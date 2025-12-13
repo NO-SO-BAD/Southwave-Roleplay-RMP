@@ -12,16 +12,15 @@ export default function App() {
   });
 
 useEffect(() => {
-  const handler = (show: boolean) => {
+  mp.events.add('cef:showMainMenu', (show: boolean) => {
     setIsMenuOpen(show);
-  };
-
-  mp.events.add('cef:showMainMenu', handler);
+  });
 
   return () => {
-    mp.events.remove('cef:showMainMenu', handler);
+    mp.events.remove('cef:showMainMenu');
   };
 }, []);
+
 
   return (
     <div className="w-full h-screen bg-transparent overflow-hidden relative">
