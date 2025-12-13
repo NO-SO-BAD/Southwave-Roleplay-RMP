@@ -8,29 +8,25 @@ export default function App() {
     health: 85,
     armor: 60,
     thirst: 45,
-    hunger: 70
+    hunger: 70,
   });
 
   useEffect(() => {
-    const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key.toLowerCase() === 'm') {
-        setIsMenuOpen(prev => !prev);
-      }
-      if (e.key === 'Escape' && isMenuOpen) {
-        setIsMenuOpen(false);
-      }
-    };
+    // Escucha eventos desde RAGE MP
+    mp.events.add('cef:showMainMenu', (show: boolean) => {
+      setIsMenuOpen(show);
+    });
 
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
-  }, [isMenuOpen]);
+    // Limpieza
+    return () => {
+      mp.events.remove('cef:showMainMenu');
+    };
+  }, []);
 
   return (
-    <div className="w-full h-screen bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 overflow-hidden">
-      {/* Background simulando vista del juego */}
-      <div className="absolute inset-0 opacity-20">
-        <div className="w-full h-full bg-[url('https://images.unsplash.com/photo-1511882150382-421056c481d6?w=1920')] bg-cover bg-center" />
-      </div>
+    <div className="w-full h-screen bg-transparent overflow-hidden relative">
+      {/* Fondo semi-transparente para ver GTA detrás */}
+      <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-transparent to-black/50 pointer-events-none" />
 
       {/* HUD siempre visible */}
       <HUD stats={playerStats} />
@@ -38,11 +34,13 @@ export default function App() {
       {/* Menú principal */}
       <MainMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
 
-      {/* Indicador de tecla */}
+      {/* Indicador de tecla M */}
       {!isMenuOpen && (
-        <div className="absolute bottom-8 right-8 text-white/60 text-sm flex items-center gap-2">
-          <kbd className="px-3 py-1.5 bg-black/40 backdrop-blur-sm border border-white/20 rounded">M</kbd>
-          <span>Abrir menú</span>
+        <div className="absolute bottom-8 right-8 text-white/70 text-sm flex items-center gap-3 pointer-events-none select-none">
+          <kbd className="px-4 py-2 bg-black/70 backdrop-blur-md border border-white/20 rounded-lg text-white font-semibold">
+            M
+          </kbd>
+          <span className="drop-shadow-2xl">Abrir menú</span>
         </div>
       )}
     </div>

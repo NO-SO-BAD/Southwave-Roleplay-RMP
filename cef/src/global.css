@@ -1,0 +1,23 @@
+/* src/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* FIX FONDO BLANCO – fuerza dark mode o transparente */
+html, body {
+  background-color: transparent !important;  /* Transparente (ve GTA detrás) */
+  color: white;  /* Texto blanco para visibilidad */
+}
+
+/* O si quieres negro sólido (mejor para UI roleplay) */
+html, body {
+  background-color: black !important;
+}
+
+/* Para componentes shadcn (card, dialog, etc.) – oscuro */
+.bg-background {
+  background-color: rgba(0, 0, 0, 0.8) !important;  /* Negro semi-transparente */
+}
+.bg-muted {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}

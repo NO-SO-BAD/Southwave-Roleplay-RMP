@@ -48,7 +48,7 @@ const INTERIOR_IPLS = [
 
   // Mansiones Dec 2025 (A Safehouse in the Hills) – IPLs no públicos aún (update muy nuevo)
   // Usa estos placeholders basados en leaks/CodeWalker (prueba y ajusta)
-  'dlc_mansions_tongva_estate',
+  'mp_2025_02__g9ec',
   'dlc_mansions_richman_villa',
   'dlc_mansions_vinewood_residence'
 ];
@@ -98,9 +98,36 @@ setInterval(updateDiscordPresence, 15000);
 console.log('[Discord] Rich Presence cargado – per-player con online total');
 
 
+let isMenuOpen = false;
+let browser: BrowserMp | null = null;
 
 mp.events.add('playerReady', () => {
-  mp.gui.cursor.show(true, true);
-  mp.gui.chat.show(false);  // Oculta chat default si quieres
-  mp.gui.execute(`location.href = 'package://cef/index.html';`);
+  mp.gui.cursor.show(false, false);
+
+  browser = mp.browsers.new('package://cef/index.html');
+
+  // Asegura menú cerrado al inicio
+  browser.execute(`window.setMainMenu(false);`);
 });
+
+// Tecla M → toggle menú
+mp.keys.bind(0x4D, true, () => { // M
+  if (!browser) return;
+
+  isMenuOpen = !isMenuOpen;
+  mp.gui.cursor.show(isMenuOpen, isMenuOpen);
+
+  browser.execute(`window.setMainMenu(${isMenuOpen});`);
+});
+
+// ESC → cierra menú
+mp.keys.bind(0x1B, true, () => { // ESC
+  if (!browser || !isMenuOpen) return;
+
+  isMenuOpen = false;
+  mp.gui.cursor.show(false, false);
+
+  browser.execute(`window.setMainMenu(false);`);
+});
+
+console.log('[UI] Toggle con M y ESC listo');

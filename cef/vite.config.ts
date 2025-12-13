@@ -51,14 +51,14 @@
     },
     build: {
       target: 'esnext',
-      outDir: '../client_packages/cef',  // FIX: Output directo a RAGE MP
+      outDir: '../client_packages/cef',  // FIX CLAVE: Output directo a RAGE MP
       emptyOutDir: true,
       rollupOptions: {
-        input: 'index.html',  // FIX: Tu HTML principal en raíz de cef/
+        input: 'index.html',  // Tu index.html en raíz de cef/
       },
-  },
+    },
     server: {
       port: 3000,
       open: true,
-  },
+    },
 });
