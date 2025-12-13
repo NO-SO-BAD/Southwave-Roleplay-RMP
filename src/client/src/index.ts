@@ -74,37 +74,33 @@ mp.events.add('playerReady', () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 // src/client/src/discord.ts
-// Discord Rich Presence – FUNCIONA 100% con appId en conf.json
+// Rich Presence con nativo RAGE MP – per-player (online total "global")
 
 mp.events.add('playerReady', () => {
-  mp.discord.update(
-    'Southwave Roleplay – Development Pre-Alpha',
-    `Steve Swarek | ID: ${mp.players.local.id} | Jugadores: ${mp.players.length}/100`
-  );
-  console.log('[Discord] Rich Presence activado');
+  updateDiscordPresence();
 });
 
-// Actualiza cada 15 segundos (opcional, para jugadores online)
-setInterval(() => {
-  if (mp.players.local) {
-    mp.discord.update(
-      'Southwave Roleplay – En desarrollo',
-      `Steve Swarek | ID: ${mp.players.local.id} | Online: ${mp.players.length}`
-    );
-  }
-}, 15000);
+mp.events.add('playerQuit', updateDiscordPresence);  // Actualiza cuando alguien sale
+
+function updateDiscordPresence() {
+  const onlineCount = mp.players.length;
+
+  mp.discord.update(
+    'Southwave Roleplay – Development Pre-Alpha',
+    `ID: ${mp.players.local.id} | Online: ${onlineCount}/100`
+  );
+}
+
+// Actualiza cada 15 segundos (para cambios online)
+setInterval(updateDiscordPresence, 15000);
+
+console.log('[Discord] Rich Presence cargado – per-player con online total');
+
+
+
+mp.events.add('playerReady', () => {
+  mp.gui.cursor.show(true, true);
+  mp.gui.chat.show(false);  // Oculta chat default si quieres
+  mp.gui.execute(`location.href = 'package://cef/index.html';`);
+});

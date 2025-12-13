@@ -36,11 +36,17 @@ mp.events.add('playerReady', function () {
     console.log('[Cliente] Interiores cargados: Eclipse Tower + Mansiones 2025');
 });
 mp.events.add('playerReady', function () {
-    mp.discord.update('Southwave Roleplay – Development Pre-Alpha', "Steve Swarek | ID: ".concat(mp.players.local.id, " | Jugadores: ").concat(mp.players.length, "/100"));
-    console.log('[Discord] Rich Presence activado');
+    updateDiscordPresence();
 });
-setInterval(function () {
-    if (mp.players.local) {
-        mp.discord.update('Southwave Roleplay – En desarrollo', "Steve Swarek | ID: ".concat(mp.players.local.id, " | Online: ").concat(mp.players.length));
-    }
-}, 15000);
+mp.events.add('playerQuit', updateDiscordPresence);
+function updateDiscordPresence() {
+    var onlineCount = mp.players.length;
+    mp.discord.update('Southwave Roleplay – Development Pre-Alpha', "ID: ".concat(mp.players.local.id, " | Online: ").concat(onlineCount, "/100"));
+}
+setInterval(updateDiscordPresence, 15000);
+console.log('[Discord] Rich Presence cargado – per-player con online total');
+mp.events.add('playerReady', function () {
+    mp.gui.cursor.show(true, true);
+    mp.gui.chat.show(false);
+    mp.gui.execute("location.href = 'package://cef/index.html';");
+});
