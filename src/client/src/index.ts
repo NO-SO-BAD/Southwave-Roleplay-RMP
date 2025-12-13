@@ -98,6 +98,14 @@ setInterval(updateDiscordPresence, 15000);
 console.log('[Discord] Rich Presence cargado – per-player con online total');
 
 
+
+
+
+
+
+
+
+
 let isMenuOpen = false;
 let browser: BrowserMp | null = null;
 
@@ -106,28 +114,34 @@ mp.events.add('playerReady', () => {
 
   browser = mp.browsers.new('package://cef/index.html');
 
-  // Asegura menú cerrado al inicio
-  browser.execute(`window.setMainMenu(false);`);
+  // Inicializa el estado del menú en el CEF
+  browser.execute(`
+    if (window.mp && mp.events) {
+      mp.events.call('cef:showMainMenu', false);
+    }
+  `);
 });
 
-// Tecla M → toggle menú
-mp.keys.bind(0x4D, true, () => { // M
+// Tecla M
+mp.keys.bind(0x4D, true, () => {
   if (!browser) return;
 
   isMenuOpen = !isMenuOpen;
   mp.gui.cursor.show(isMenuOpen, isMenuOpen);
 
-  browser.execute(`window.setMainMenu(${isMenuOpen});`);
+  browser.execute(`
+    mp.events.call('cef:showMainMenu', ${isMenuOpen});
+  `);
 });
 
-// ESC → cierra menú
-mp.keys.bind(0x1B, true, () => { // ESC
+// ESC
+mp.keys.bind(0x1B, true, () => {
   if (!browser || !isMenuOpen) return;
 
   isMenuOpen = false;
   mp.gui.cursor.show(false, false);
 
-  browser.execute(`window.setMainMenu(false);`);
+  browser.execute(`
+    mp.events.call('cef:showMainMenu', false);
+  `);
 });
-
-console.log('[UI] Toggle con M y ESC listo');

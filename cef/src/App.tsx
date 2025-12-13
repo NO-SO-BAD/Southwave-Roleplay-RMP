@@ -11,17 +11,17 @@ export default function App() {
     hunger: 70,
   });
 
-  useEffect(() => {
-    // Escucha eventos desde RAGE MP
-    mp.events.add('cef:showMainMenu', (show: boolean) => {
-      setIsMenuOpen(show);
-    });
+useEffect(() => {
+  const handler = (show: boolean) => {
+    setIsMenuOpen(show);
+  };
 
-    // Limpieza
-    return () => {
-      mp.events.remove('cef:showMainMenu');
-    };
-  }, []);
+  mp.events.add('cef:showMainMenu', handler);
+
+  return () => {
+    mp.events.remove('cef:showMainMenu', handler);
+  };
+}, []);
 
   return (
     <div className="w-full h-screen bg-transparent overflow-hidden relative">
