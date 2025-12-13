@@ -59,3 +59,52 @@ mp.events.add('playerReady', () => {
   });
   console.log('[Cliente] Interiores cargados: Eclipse Tower + Mansiones 2025');
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// src/client/src/discord.ts
+// Discord Rich Presence – FUNCIONA 100% con appId en conf.json
+
+mp.events.add('playerReady', () => {
+  mp.discord.update(
+    'Southwave Roleplay – Development Pre-Alpha',
+    `Steve Swarek | ID: ${mp.players.local.id} | Jugadores: ${mp.players.length}/100`
+  );
+  console.log('[Discord] Rich Presence activado');
+});
+
+// Actualiza cada 15 segundos (opcional, para jugadores online)
+setInterval(() => {
+  if (mp.players.local) {
+    mp.discord.update(
+      'Southwave Roleplay – En desarrollo',
+      `Steve Swarek | ID: ${mp.players.local.id} | Online: ${mp.players.length}`
+    );
+  }
+}, 15000);

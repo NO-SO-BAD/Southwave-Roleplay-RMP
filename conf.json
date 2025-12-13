@@ -7,6 +7,14 @@
   "csharp": "disabled",
   "port": 22006,
 
+  "discord": {
+    "appId": "1449188057487245332", 
+    "largeImage": "Sunset",
+    "largeText": "Southwave Roleplay",
+    "smallImage": "develop",
+    "smallText": "Development Pre-Alpha"
+  },
+
   "voice": {
     "distance": 30.0
   },
@@ -19,3 +27,5 @@
     "southwave-roleplay"
   ]
 }
+
+
