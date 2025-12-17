@@ -2,39 +2,36 @@
 const CHAT_RANGE = 20.0; // Rango normal
 const ME_DO_RANGE = 20.0;
 
-mp.events.addCommand("me", (player: PlayerMp, fullText: string, ...args: string[]) => {
-  const action = args.join(" ");
-  if (!action) return player.outputChatBox("Uso: /me [acción]");
 
-  mp.players.forEachInRange(player.position, ME_DO_RANGE, (nearPlayer: PlayerMp) => {
-    nearPlayer.outputChatBox(`!{c8a2c8}* ${player.name} ${action}`);
-  });
-});
-
-mp.events.addCommand("do", (player: PlayerMp, fullText: string, ...args: string[]) => {
-  const action = args.join(" ");
-  if (!action) return player.outputChatBox("Uso: /do [acción]");
-
-  mp.players.forEachInRange(player.position, ME_DO_RANGE, (nearPlayer: PlayerMp) => {
-    nearPlayer.outputChatBox(`!{a8c8a2}* ${action} (( ${player.name} ))`);
-  });
-});
-
-mp.events.addCommand("ooc", (player: PlayerMp, fullText: string, ...args: string[]) => {
-  const text = args.join(" ");
-  if (!text) return player.outputChatBox("Uso: /ooc [mensaje]");
-
-  mp.players.broadcast(`!{aaaaaa}(( OOC ${player.name}: ${text} ))`);
-});
-
-mp.events.add("playerChat", (player: PlayerMp, message: string) => {
-  if (!message || message.trim() === "") return;
-
+// src/server/src/modules/chat/index.ts
+mp.events.add('playerChat', (player: PlayerMp, message: string) => {
   message = message.trim();
+  if (message.length === 0) return;
 
-  mp.players.forEachInRange(player.position, CHAT_RANGE, (nearPlayer: PlayerMp) => {
-    nearPlayer.outputChatBox(`${player.name}: ${message}`);
-  });
+  if (message.startsWith('/')) {
+    console.log(`[Comando] ${player.name}: ${message}`);
+    return;
+  }
 
-  console.log(`[CHAT] ${player.name}: ${message}`);
+  // Mensaje IC normal
+  mp.players.broadcast(`!{#FFFFFF}${player.name} dice: ${message}`);
+  console.log(`[Chat IC] ${player.name}: ${message}`);
+});
+
+// Comando /ooc
+mp.events.addCommand('ooc', (player: PlayerMp, _, fullMessage: string) => {
+  if (!fullMessage || fullMessage.trim() === '') {
+    player.outputChatBox('!{#ff0000}Uso: /ooc [mensaje]');
+    return;
+  }
+
+  const message = fullMessage.trim();
+  mp.players.broadcast(`!{#AAAAAA}(( OOC | ${player.name}: ${message} ))`);
+  console.log(`[OOC] ${player.name}: ${message}`);
+});
+
+// Bienvenida
+mp.events.add('playerJoin', (player: PlayerMp) => {
+  player.outputChatBox('!{#00ffaa}Bienvenido a Southwave Roleplay');
+  player.outputChatBox('!{#00ff00}Chat IC normal – /ooc para out-of-character');
 });

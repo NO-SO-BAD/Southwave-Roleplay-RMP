@@ -1,3 +1,4 @@
+// src/components/HUD.tsx
 import { Heart, Shield, Droplet, UtensilsCrossed } from 'lucide-react';
 
 interface HUDProps {
@@ -12,26 +13,10 @@ interface HUDProps {
 export function HUD({ stats }: HUDProps) {
   return (
     <div className="absolute bottom-8 left-8 flex gap-4 z-10">
-      <StatCircle 
-        value={stats.health} 
-        icon={Heart} 
-        color="health"
-      />
-      <StatCircle 
-        value={stats.armor} 
-        icon={Shield} 
-        color="armor"
-      />
-      <StatCircle 
-        value={stats.thirst} 
-        icon={Droplet} 
-        color="thirst"
-      />
-      <StatCircle 
-        value={stats.hunger} 
-        icon={UtensilsCrossed} 
-        color="hunger"
-      />
+      <StatCircle value={stats.health} icon={Heart} color="health" />
+      <StatCircle value={stats.armor} icon={Shield} color="armor" />
+      <StatCircle value={stats.thirst} icon={Droplet} color="thirst" />
+      <StatCircle value={stats.hunger} icon={UtensilsCrossed} color="hunger" />
     </div>
   );
 }
@@ -64,7 +49,6 @@ function StatCircle({ value, icon: Icon, color }: StatCircleProps) {
 
   return (
     <div className="relative w-20 h-20">
-      {/* Círculo de fondo */}
       <svg className="w-full h-full -rotate-90" viewBox="0 0 80 80">
         <circle
           cx="40"
@@ -89,13 +73,11 @@ function StatCircle({ value, icon: Icon, color }: StatCircleProps) {
           style={{ filter: 'drop-shadow(0 0 8px rgba(255,255,255,0.3))' }}
         />
       </svg>
-      
-      {/* Icono centrado */}
+
       <div className="absolute inset-0 flex items-center justify-center">
         <Icon size={24} color={getColor()} strokeWidth={2.5} />
       </div>
-      
-      {/* Valor */}
+
       <div className="absolute inset-0 flex items-center justify-center">
         <span className="text-white text-xs mt-8" style={{ textShadow: '0 2px 4px rgba(0,0,0,0.8)' }}>
           {value}%

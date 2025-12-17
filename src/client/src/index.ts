@@ -179,40 +179,67 @@ mp.events.add("playerCommand", (command: string) => {
 
 
 
-
-
-
-
-
-
-// src/client/src/ui-toggle.ts
+// src/client/src/ui-toggle.ts (MODIFICADO – chat custom en CEF)
 let isMenuOpen = false;
 
 mp.events.add('playerReady', () => {
   console.log('[Client] playerReady – cargando CEF');
   mp.gui.cursor.show(false, false);
+  mp.gui.chat.show(false);  // Oculta chat default permanentemente
   mp.gui.execute("location.href = 'package://cef/index.html';");
-  
-  // Delay para asegurar que CEF esté listo
+
   setTimeout(() => {
-    mp.gui.execute('if (window.ui && window.ui.mainMenu) ui.mainMenu.hide()');
-  }, 1000);
+    mp.gui.execute('if (window.ui && window.ui.mainMenu) window.ui.mainMenu.hide()');
+  }, 3000);
 });
 
-// Tecla M → toggle menú
-mp.keys.bind(0x4D, true, () => { // M key
+// Tecla M → menú
+mp.keys.bind(0x4D, true, () => {
   isMenuOpen = !isMenuOpen;
   mp.gui.cursor.show(isMenuOpen, isMenuOpen);
-  console.log(`[Client] M presionado – menú ${isMenuOpen ? 'abierto' : 'cerrado'}`);
-  mp.gui.execute(`if (window.ui && window.ui.mainMenu) ui.mainMenu.${isMenuOpen ? 'show' : 'hide'}()`);
+  mp.gui.execute(`if (window.ui && window.ui.mainMenu) window.ui.mainMenu.${isMenuOpen ? 'show' : 'hide'}()`);
 });
 
 // ESC → cierra menú
-mp.keys.bind(0x1B, true, () => { // ESC
+mp.keys.bind(0x1B, true, () => {
   if (isMenuOpen) {
     isMenuOpen = false;
     mp.gui.cursor.show(false, false);
-    console.log('[Client] ESC presionado – menú cerrado');
-    mp.gui.execute('if (window.ui && window.ui.mainMenu) ui.mainMenu.hide()');
+    mp.gui.execute('if (window.ui && window.ui.mainMenu) window.ui.mainMenu.hide()');
   }
 });
+
+// Intercepta playerChat y envía a CEF
+mp.events.add('playerChat', (message: string) => {
+  mp.gui.execute(`if (window.ui && window.ui.addChatMessage) window.ui.addChatMessage('${mp.players.local.name}', '${message}', 'ic')`);
+});
+
+// Bienvenida al entrar
+mp.events.add('playerJoin', () => {
+  mp.gui.execute(`if (window.ui && window.ui.addChatMessage) window.ui.addChatMessage('System', 'Bienvenido a Southwave Roleplay', 'system')`);
+});
+
+console.log('[UI] Chat custom en CEF listo – chat default oculto');
+
+
+
+
+
+
+
+
+
+
+function updateHUD() {
+  if (mp.players.local) {
+    const stats = {
+      health: Math.round(mp.players.local.getHealth()),
+      armor: Math.round(mp.players.local.getArmour()),
+      thirst: 100,  // Placeholder
+      hunger: 100,  // Placeholder
+    };
+
+    // Envía stats a CEF via window.ui
+    mp.gui.execute(`if (window.ui && window.ui.updateStats) window.ui.updateStats(${JSON.stringify(stats)})`);
+  }
+}

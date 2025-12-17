@@ -65,22 +65,39 @@ var isMenuOpen = false;
 mp.events.add('playerReady', function () {
     console.log('[Client] playerReady – cargando CEF');
     mp.gui.cursor.show(false, false);
+    mp.gui.chat.show(false);
     mp.gui.execute("location.href = 'package://cef/index.html';");
     setTimeout(function () {
-        mp.gui.execute('if (window.ui && window.ui.mainMenu) ui.mainMenu.hide()');
-    }, 1000);
+        mp.gui.execute('if (window.ui && window.ui.mainMenu) window.ui.mainMenu.hide()');
+    }, 3000);
 });
 mp.keys.bind(0x4D, true, function () {
     isMenuOpen = !isMenuOpen;
     mp.gui.cursor.show(isMenuOpen, isMenuOpen);
-    console.log("[Client] M presionado \u2013 men\u00FA ".concat(isMenuOpen ? 'abierto' : 'cerrado'));
-    mp.gui.execute("if (window.ui && window.ui.mainMenu) ui.mainMenu.".concat(isMenuOpen ? 'show' : 'hide', "()"));
+    mp.gui.execute("if (window.ui && window.ui.mainMenu) window.ui.mainMenu.".concat(isMenuOpen ? 'show' : 'hide', "()"));
 });
 mp.keys.bind(0x1B, true, function () {
     if (isMenuOpen) {
         isMenuOpen = false;
         mp.gui.cursor.show(false, false);
-        console.log('[Client] ESC presionado – menú cerrado');
-        mp.gui.execute('if (window.ui && window.ui.mainMenu) ui.mainMenu.hide()');
+        mp.gui.execute('if (window.ui && window.ui.mainMenu) window.ui.mainMenu.hide()');
     }
 });
+mp.events.add('playerChat', function (message) {
+    mp.gui.execute("if (window.ui && window.ui.addChatMessage) window.ui.addChatMessage('".concat(mp.players.local.name, "', '").concat(message, "', 'ic')"));
+});
+mp.events.add('playerJoin', function () {
+    mp.gui.execute("if (window.ui && window.ui.addChatMessage) window.ui.addChatMessage('System', 'Bienvenido a Southwave Roleplay', 'system')");
+});
+console.log('[UI] Chat custom en CEF listo – chat default oculto');
+function updateHUD() {
+    if (mp.players.local) {
+        var stats = {
+            health: Math.round(mp.players.local.getHealth()),
+            armor: Math.round(mp.players.local.getArmour()),
+            thirst: 100,
+            hunger: 100,
+        };
+        mp.gui.execute("if (window.ui && window.ui.updateStats) window.ui.updateStats(".concat(JSON.stringify(stats), ")"));
+    }
+}
