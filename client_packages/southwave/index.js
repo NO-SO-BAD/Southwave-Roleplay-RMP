@@ -45,24 +45,42 @@ function updateDiscordPresence() {
 }
 setInterval(updateDiscordPresence, 15000);
 console.log('[Discord] Rich Presence cargado – per-player con online total');
+mp.events.add("playerCommand", function (command) {
+    var _a;
+    var args = command.split(" ");
+    var cmd = (_a = args.shift()) === null || _a === void 0 ? void 0 : _a.toLowerCase();
+    if (cmd === "sound") {
+        var soundName = args[0];
+        var soundSet = args[1] || "HUD_FRONTEND_DEFAULT_SOUNDSET";
+        if (!soundName) {
+            mp.gui.chat.push("!{#ffcc00}Uso: /sound <SONIDO> [SOUNDSET]");
+            mp.gui.chat.push("!{#aaaaaa}Ej: /sound CLICK HUD_FRONTEND_DEFAULT_SOUNDSET");
+            return;
+        }
+        mp.game.audio.playSoundFrontend(-1, soundName, soundSet, true);
+        mp.gui.chat.push("!{#44ff44}Sonido: ".concat(soundName, " | Set: ").concat(soundSet));
+    }
+});
 var isMenuOpen = false;
-var browser = null;
 mp.events.add('playerReady', function () {
+    console.log('[Client] playerReady – cargando CEF');
     mp.gui.cursor.show(false, false);
-    browser = mp.browsers.new('package://cef/index.html');
-    browser.execute("\n    if (window.mp && mp.events) {\n      mp.events.call('cef:showMainMenu', false);\n    }\n  ");
+    mp.gui.execute("location.href = 'package://cef/index.html';");
+    setTimeout(function () {
+        mp.gui.execute('if (window.ui && window.ui.mainMenu) ui.mainMenu.hide()');
+    }, 1000);
 });
 mp.keys.bind(0x4D, true, function () {
-    if (!browser)
-        return;
     isMenuOpen = !isMenuOpen;
     mp.gui.cursor.show(isMenuOpen, isMenuOpen);
-    browser.execute("\n    mp.events.call('cef:showMainMenu', ".concat(isMenuOpen, ");\n  "));
+    console.log("[Client] M presionado \u2013 men\u00FA ".concat(isMenuOpen ? 'abierto' : 'cerrado'));
+    mp.gui.execute("if (window.ui && window.ui.mainMenu) ui.mainMenu.".concat(isMenuOpen ? 'show' : 'hide', "()"));
 });
 mp.keys.bind(0x1B, true, function () {
-    if (!browser || !isMenuOpen)
-        return;
-    isMenuOpen = false;
-    mp.gui.cursor.show(false, false);
-    browser.execute("\n    mp.events.call('cef:showMainMenu', false);\n  ");
+    if (isMenuOpen) {
+        isMenuOpen = false;
+        mp.gui.cursor.show(false, false);
+        console.log('[Client] ESC presionado – menú cerrado');
+        mp.gui.execute('if (window.ui && window.ui.mainMenu) ui.mainMenu.hide()');
+    }
 });

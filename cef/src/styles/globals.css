@@ -2,7 +2,7 @@
 
 :root {
   --font-size: 16px;
-  --background: #ffffff;
+  --background: transparent;
   --foreground: oklch(0.145 0 0);
   --card: #ffffff;
   --card-foreground: oklch(0.145 0 0);
@@ -42,7 +42,7 @@
 }
 
 .dark {
-  --background: oklch(0.145 0 0);
+  --background: transparent
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.145 0 0);
   --card-foreground: oklch(0.985 0 0);
@@ -182,4 +182,22 @@
 
 html {
   font-size: var(--font-size);
+}
+
+
+html, body, #root {
+  background: transparent !important;
+  color: white;
+}
+
+.dark {
+  --background: 15 15 15;  /* slate-900 */
+  --foreground: 255 255 255;
+  --primary: 59 130 246;  /* blue-500 */
+}
+
+/* Fix blur en CEF viejo */
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
 }

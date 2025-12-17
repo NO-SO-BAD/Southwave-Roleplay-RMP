@@ -101,7 +101,7 @@ console.log('[Discord] Rich Presence cargado – per-player con online total');
 
 
 
-
+/*
 
 
 
@@ -144,4 +144,75 @@ mp.keys.bind(0x1B, true, () => {
   browser.execute(`
     mp.events.call('cef:showMainMenu', false);
   `);
+});
+*/
+mp.events.add("playerCommand", (command: string) => {
+  const args = command.split(" ");
+  const cmd = args.shift()?.toLowerCase();
+
+  if (cmd === "sound") {
+    const soundName = args[0];
+    const soundSet = args[1] || "HUD_FRONTEND_DEFAULT_SOUNDSET";
+
+    if (!soundName) {
+      mp.gui.chat.push("!{#ffcc00}Uso: /sound <SONIDO> [SOUNDSET]");
+      mp.gui.chat.push("!{#aaaaaa}Ej: /sound CLICK HUD_FRONTEND_DEFAULT_SOUNDSET");
+      return;
+    }
+
+    mp.game.audio.playSoundFrontend(
+      -1,
+      soundName,
+      soundSet,
+      true
+    );
+
+    mp.gui.chat.push(
+      `!{#44ff44}Sonido: ${soundName} | Set: ${soundSet}`
+    );
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+// src/client/src/ui-toggle.ts
+let isMenuOpen = false;
+
+mp.events.add('playerReady', () => {
+  console.log('[Client] playerReady – cargando CEF');
+  mp.gui.cursor.show(false, false);
+  mp.gui.execute("location.href = 'package://cef/index.html';");
+  
+  // Delay para asegurar que CEF esté listo
+  setTimeout(() => {
+    mp.gui.execute('if (window.ui && window.ui.mainMenu) ui.mainMenu.hide()');
+  }, 1000);
+});
+
+// Tecla M → toggle menú
+mp.keys.bind(0x4D, true, () => { // M key
+  isMenuOpen = !isMenuOpen;
+  mp.gui.cursor.show(isMenuOpen, isMenuOpen);
+  console.log(`[Client] M presionado – menú ${isMenuOpen ? 'abierto' : 'cerrado'}`);
+  mp.gui.execute(`if (window.ui && window.ui.mainMenu) ui.mainMenu.${isMenuOpen ? 'show' : 'hide'}()`);
+});
+
+// ESC → cierra menú
+mp.keys.bind(0x1B, true, () => { // ESC
+  if (isMenuOpen) {
+    isMenuOpen = false;
+    mp.gui.cursor.show(false, false);
+    console.log('[Client] ESC presionado – menú cerrado');
+    mp.gui.execute('if (window.ui && window.ui.mainMenu) ui.mainMenu.hide()');
+  }
 });

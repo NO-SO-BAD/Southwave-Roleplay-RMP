@@ -1,47 +1,32 @@
-import { useState, useEffect } from 'react';
-import { HUD } from './components/HUD';
-import { MainMenu } from './components/MainMenu';
+// src/main.tsx
+import { createRoot } from "react-dom/client";
+import App from "./App.tsx";
+import "./index.css";         // Tu index.css (Tailwind directives)
+import "./styles/globals.css"; // Tu globals.css (reset + custom)
 
-export default function App() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [playerStats, setPlayerStats] = useState({
-    health: 85,
-    armor: 60,
-    thirst: 45,
-    hunger: 70,
-  });
+// Reset y fuerza dark mode para shadcn/ui (fix negro opaco)
+document.documentElement.classList.add('dark');  // Fuerza dark mode
 
-useEffect(() => {
-  mp.events.add('cef:showMainMenu', (show: boolean) => {
-    setIsMenuOpen(show);
-  });
+// Inyecta Tailwind manualmente (fix production RAGE MP)
+const tailwindStyle = document.createElement('style');
+tailwindStyle.innerHTML = `
+  @tailwind base;
+  @tailwind components;
+  @tailwind utilities;
 
-  return () => {
-    mp.events.remove('cef:showMainMenu');
-  };
-}, []);
+  html, body, #root {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background: transparent !important;
+    overflow: hidden;
+    color: white;
+    font-family: system-ui, -apple-system, sans-serif;
+  }
+`;
+document.head.appendChild(tailwindStyle);
 
+console.log('[CEF] Tailwind inyectado + dark mode forzado');
 
-  return (
-    <div className="w-full h-screen bg-transparent overflow-hidden relative">
-      {/* Fondo semi-transparente para ver GTA detrás */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black/50 via-transparent to-black/50 pointer-events-none" />
-
-      {/* HUD siempre visible */}
-      <HUD stats={playerStats} />
-
-      {/* Menú principal */}
-      <MainMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
-
-      {/* Indicador de tecla M */}
-      {!isMenuOpen && (
-        <div className="absolute bottom-8 right-8 text-white/70 text-sm flex items-center gap-3 pointer-events-none select-none">
-          <kbd className="px-4 py-2 bg-black/70 backdrop-blur-md border border-white/20 rounded-lg text-white font-semibold">
-            M
-          </kbd>
-          <span className="drop-shadow-2xl">Abrir menú</span>
-        </div>
-      )}
-    </div>
-  );
-}
+createRoot(document.getElementById("root")!).render(<App />);
