@@ -178,29 +178,34 @@ mp.events.add("playerCommand", (command: string) => {
 
 
 
-
-// src/client/src/ui-toggle.ts (MODIFICADO – chat custom en CEF)
+// src/client/src/ui-toggle.ts
 let isMenuOpen = false;
 
 mp.events.add('playerReady', () => {
   console.log('[Client] playerReady – cargando CEF');
   mp.gui.cursor.show(false, false);
-  mp.gui.chat.show(false);  // Oculta chat default permanentemente
+  mp.gui.chat.show(false);
   mp.gui.execute("location.href = 'package://cef/index.html';");
 
-  setTimeout(() => {
-    mp.gui.execute('if (window.ui && window.ui.mainMenu) window.ui.mainMenu.hide()');
-  }, 3000);
+  // Delay largo + múltiples intentos
+  const hideMenu = () => {
+    mp.gui.execute('if (window.ui && window.ui.mainMenu) { window.ui.mainMenu.hide(); console.log("[Client] Menú oculto"); }');
+  };
+
+  setTimeout(hideMenu, 3000);
+  setTimeout(hideMenu, 6000);
+  setTimeout(hideMenu, 10000); // Fallback extra
 });
 
-// Tecla M → menú
+// Tecla M
 mp.keys.bind(0x4D, true, () => {
   isMenuOpen = !isMenuOpen;
   mp.gui.cursor.show(isMenuOpen, isMenuOpen);
+  console.log(`[Client] M presionado – menú ${isMenuOpen ? 'abierto' : 'cerrado'}`);
   mp.gui.execute(`if (window.ui && window.ui.mainMenu) window.ui.mainMenu.${isMenuOpen ? 'show' : 'hide'}()`);
 });
 
-// ESC → cierra menú
+// ESC
 mp.keys.bind(0x1B, true, () => {
   if (isMenuOpen) {
     isMenuOpen = false;
@@ -208,25 +213,6 @@ mp.keys.bind(0x1B, true, () => {
     mp.gui.execute('if (window.ui && window.ui.mainMenu) window.ui.mainMenu.hide()');
   }
 });
-
-// Intercepta playerChat y envía a CEF
-mp.events.add('playerChat', (message: string) => {
-  mp.gui.execute(`if (window.ui && window.ui.addChatMessage) window.ui.addChatMessage('${mp.players.local.name}', '${message}', 'ic')`);
-});
-
-// Bienvenida al entrar
-mp.events.add('playerJoin', () => {
-  mp.gui.execute(`if (window.ui && window.ui.addChatMessage) window.ui.addChatMessage('System', 'Bienvenido a Southwave Roleplay', 'system')`);
-});
-
-console.log('[UI] Chat custom en CEF listo – chat default oculto');
-
-
-
-
-
-
-
 
 
 
