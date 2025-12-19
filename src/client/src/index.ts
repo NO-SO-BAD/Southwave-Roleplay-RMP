@@ -5,6 +5,7 @@ import "@classes/Creator.class";
 import "@classes/Vehicle.class";
 import "@classes/Spectate.class";
 import "@classes/Attachments.class";
+import "@classes/PauseMenu.class";
 //-----------------------------------------//
 import "@events/Auth.event";
 import "@events/Render.event";

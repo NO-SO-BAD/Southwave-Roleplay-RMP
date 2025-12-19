@@ -1,9 +1,9 @@
 class _WorldManager {
     private readonly dateNow = new Date();
 
-    private secondTimerInterval: NodeJS.Timer;
-    private minuteTimerInterval: NodeJS.Timer;
-    private hourTimerInterval: NodeJS.Timer;
+    private secondTimerInterval: NodeJS.Timeout; //timer old implementation
+    private minuteTimerInterval: NodeJS.Timeout;
+    private hourTimerInterval: NodeJS.Timeout;
 
     constructor() {
         // this.secondTimerInterval = setInterval(this.secondTimer.bind(this), 1_000);

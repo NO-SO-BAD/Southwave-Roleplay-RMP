@@ -2258,6 +2258,95 @@ exports.PlayerKeybind = new _PlayerKeybind();
 
 /***/ },
 
+/***/ "./src/client/src/classes/PauseMenu.class.ts"
+/*!***************************************************!*\
+  !*** ./src/client/src/classes/PauseMenu.class.ts ***!
+  \***************************************************/
+(__unused_webpack_module, exports) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+exports.PauseMenu = void 0;
+var PauseMenu = (function () {
+    function PauseMenu() {
+        this.ytdFiles = [
+            "minimap_0_0",
+            "minimap_0_1",
+            "minimap_1_0",
+            "minimap_1_1",
+            "minimap_2_0",
+            "minimap_2_1",
+            "minimap_lod_128",
+            "minimap_sea_0_0",
+            "minimap_sea_0_1",
+            "minimap_sea_1_0",
+            "minimap_sea_1_1",
+            "minimap_sea_2_0",
+            "minimap_sea_2_1"
+        ];
+        this.yddFiles = [
+            "minimap_0_2", "minimap_0_3", "minimap_0_4", "minimap_0_5", "minimap_0_6",
+            "minimap_1_1", "minimap_1_2", "minimap_1_3", "minimap_1_4", "minimap_1_5",
+            "minimap_1_6", "minimap_1_7", "minimap_1_8", "minimap_2_0", "minimap_2_1",
+            "minimap_2_2", "minimap_2_3", "minimap_2_4", "minimap_2_5", "minimap_2_6",
+            "minimap_2_7", "minimap_2_8", "minimap_3_0", "minimap_3_1", "minimap_3_2",
+            "minimap_3_3", "minimap_3_4", "minimap_3_5", "minimap_3_6", "minimap_3_7",
+            "minimap_3_8", "minimap_4_0", "minimap_4_1", "minimap_4_2", "minimap_4_3",
+            "minimap_4_4", "minimap_4_5", "minimap_4_6", "minimap_4_7", "minimap_4_8",
+            "minimap_5_0", "minimap_5_1", "minimap_5_2", "minimap_5_3", "minimap_5_4",
+            "minimap_5_5", "minimap_5_6", "minimap_5_7", "minimap_5_8", "minimap_6_0",
+            "minimap_6_1", "minimap_6_2", "minimap_6_3", "minimap_6_4", "minimap_6_5",
+            "minimap_6_6", "minimap_6_7", "minimap_6_8", "minimap_7_0", "minimap_7_1",
+            "minimap_7_2", "minimap_7_3", "minimap_7_4", "minimap_7_5", "minimap_7_6"
+        ];
+        this.gfxFiles = [
+            "int3232302352",
+            "minimap"
+        ];
+        this.loadAllTextures();
+        this.initRenderLoop();
+    }
+    PauseMenu.prototype.loadAllTextures = function () {
+        this.ytdFiles.forEach(function (name) {
+            mp.game.graphics.requestStreamedTextureDict(name, true);
+        });
+        this.yddFiles.forEach(function (name) {
+            var hash = mp.game.joaat(name);
+            mp.game.streaming.requestModel(hash);
+        });
+        this.gfxFiles.forEach(function (name) {
+            var hash = mp.game.joaat(name);
+            mp.game.streaming.requestModel(hash);
+        });
+    };
+    PauseMenu.prototype.customizePauseMenu = function () {
+        mp.game.invoke("0xC3B07BA00A83B0F1", false);
+        mp.game.invoke("0xF1A6C18B35BCADE6", false);
+        mp.game.invoke("0x50978C8CD8C4B52F", false);
+    };
+    PauseMenu.prototype.customizeRadar = function () {
+        mp.game.invoke("0xD2049635DEB9C375", 0);
+        mp.game.invoke("0xB3C94A90D9FC9E62");
+    };
+    PauseMenu.prototype.initRenderLoop = function () {
+        var _this = this;
+        mp.events.add("render", function () {
+            var isPaused = mp.game.invoke("0x5E9564D8246B909A");
+            if (isPaused) {
+                _this.customizePauseMenu();
+                _this.customizeRadar();
+            }
+        });
+    };
+    return PauseMenu;
+}());
+exports.PauseMenu = PauseMenu;
+var pauseMenu = new PauseMenu();
+
+
+/***/ },
+
 /***/ "./src/client/src/classes/Raycast.class.ts"
 /*!*************************************************!*\
   !*** ./src/client/src/classes/Raycast.class.ts ***!
@@ -2982,6 +3071,7 @@ __webpack_require__(/*! @classes/Creator.class */ "./src/client/src/classes/Crea
 __webpack_require__(/*! @classes/Vehicle.class */ "./src/client/src/classes/Vehicle.class.ts");
 __webpack_require__(/*! @classes/Spectate.class */ "./src/client/src/classes/Spectate.class.ts");
 __webpack_require__(/*! @classes/Attachments.class */ "./src/client/src/classes/Attachments.class.ts");
+__webpack_require__(/*! @classes/PauseMenu.class */ "./src/client/src/classes/PauseMenu.class.ts");
 __webpack_require__(/*! @events/Auth.event */ "./src/client/src/clientevents/Auth.event.ts");
 __webpack_require__(/*! @events/Render.event */ "./src/client/src/clientevents/Render.event.ts");
 __webpack_require__(/*! @events/Player.event */ "./src/client/src/clientevents/Player.event.ts");
