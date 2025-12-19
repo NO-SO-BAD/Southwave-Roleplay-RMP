@@ -37,7 +37,7 @@ const MainHUD: FC<{ store: typeof hudStore; playerStore: typeof playerStore }> =
             <div className={style.center}></div>
             <div className={style.right}>
                 <div className={style.servername}>
-                    <span style={{ color: "red" }}>RAGEMP ROLEPLAY</span>
+                    <span style={{ color: "red" }}>Southwave Roleplay | Development</span>
 
                     <div className={style.playerInfo}>
                         <div className={style.id}>ID: {playerStore.data.id}</div>

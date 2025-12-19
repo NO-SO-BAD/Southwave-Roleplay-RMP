@@ -1,4 +1,3 @@
-
 interface BlipData {
     name: string;
     x: number;
@@ -50,19 +49,63 @@ const allBlips: BlipData[] = [
         color: 2,
         scale: 0.85,
         shortRange: true
+    })) ),
+        // LSPD 
+    ...( [
+        [434.7, -980.6, 30.8]
+
+    ].map(pos => ({
+        name: "Estacion de policia",
+        x: pos[0], y: pos[1], z: pos[2],
+        sprite: 60,
+        color: 2,
+        scale: 0.85,
+        shortRange: false
+    })) ),
+    // consesionarios
+    ...( [
+        [-46.151,-1105.793, 30.8]
+
+    ].map(pos => ({
+        name: "Concesionario",
+        x: pos[0], y: pos[1], z: pos[2],
+        sprite: 810,
+        color: 2,
+        scale: 0.85,
+        shortRange: false
     })) )
+
+    
+
+    
 ];
 
+
+
+
 export function createAllBlipsForPlayer(player: PlayerMp): void {
+    // Limpiar blips antiguos
+    mp.blips.forEach((blip) => {
+        if (blip.getVariable('southwave_blip') && blip.dimension === player.dimension) {
+            blip.destroy();
+        }
+    });
+
     let count = 0;
+
     allBlips.forEach(data => {
         const blip = mp.blips.new(data.sprite, new mp.Vector3(data.x, data.y, data.z), {
             name: data.name,
             color: data.color,
             scale: data.scale ?? 1.0,
             shortRange: data.shortRange ?? true,
-            dimension: player.dimension
+            dimension: player.dimension,
+            alpha: 255
         });
+
+        // FIX: Quita setCategory o hazlo opcional – funciona sin él para minimapa básico
+        // blip.setCategory(1);  // Comenta esta línea – no esencial para visibilidad
+
         blip.setVariable('southwave_blip', true);
         count++;
     });
@@ -70,3 +113,5 @@ export function createAllBlipsForPlayer(player: PlayerMp): void {
     player.outputChatBox(`¡${count} blips cargados! (Hospitales + Gasolineras + 24/7)`);
     player.outputChatBox("Usa /blips para recargar");
 }
+
+console.log("map-blips.ts cargado");
