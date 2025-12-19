@@ -28,7 +28,8 @@
             "@commands/*": ["./commands/*"],
             "@prototype/*": ["./prototype/*"],
             "@shared/*": ["../shared/*"],
-            "@map/*": ["./map/*"]
+            "@map/*": ["./map/*"],
+            "@database": ["./database/databasemodule.ts"]
         }
     },
     "files": [

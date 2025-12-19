@@ -20,7 +20,8 @@ moduleAlias.addAliases({
   "@commands": path.join(root, "commands"),
   "@prototype": path.join(root, "prototype"),
   "@shared": path.join(root, "../shared"),
-  "@map": path.join(root, "map")
+  "@jobs": path.join(root, "jobs"),
+  "@map": path.join(root, "map"),
 });
 
 /* ===============================
@@ -59,7 +60,6 @@ require("@events/Inventory.event");
 require("@events/Death.event");
 require("@events/Vehicle.event");
 require("@events/Point.event");
-
 
 const _api_1 = require("@api");
 //---------------------------------------//

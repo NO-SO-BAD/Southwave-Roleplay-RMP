@@ -7,7 +7,7 @@ import { BanEntity } from "./entity/Ban.entity";
 import { InventoryItemsEntity } from "./entity/Inventory.entity";
 import { VehicleEntity } from "./entity/Vehicle.entity";
 import { BankAccountEntity } from "@entities/Bank.entity";
-
+import { JobEntity } from "./entity/Job.entity";
 // ============================================
 // CONFIGURACIÓN DE BASE DE DATOS (CREDENCIALES DIRECTAS)
 // ============================================
@@ -53,7 +53,8 @@ export const MainDataSource = new DataSource({
         BankAccountEntity,
         BanEntity,
         InventoryItemsEntity,
-        VehicleEntity
+        VehicleEntity,
+        JobEntity
     ],
     migrations: [],
     subscribers: [],

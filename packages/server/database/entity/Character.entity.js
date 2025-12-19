@@ -19,6 +19,7 @@ const Account_entity_1 = require("./Account.entity");
 const Death_event_1 = require("@events/Death.event");
 const index_1 = require("@shared/index");
 const Bank_entity_1 = require("@entities/Bank.entity");
+const Job_entity_1 = require("./Job.entity");
 let CharacterEntity = class CharacterEntity {
     constructor() {
         this.adminlevel = 0;
@@ -106,6 +107,10 @@ __decorate([
     (0, typeorm_1.ManyToOne)(() => Account_entity_1.AccountEntity, (account) => account.id),
     __metadata("design:type", Account_entity_1.AccountEntity)
 ], CharacterEntity.prototype, "account", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => Job_entity_1.JobEntity, (job) => job.character),
+    __metadata("design:type", Array)
+], CharacterEntity.prototype, "jobs", void 0);
 __decorate([
     (0, typeorm_1.Column)({ type: "int", width: 11, default: 0 }),
     __metadata("design:type", Number)

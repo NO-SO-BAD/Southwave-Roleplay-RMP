@@ -7,6 +7,7 @@ import { AccountEntity } from "./Account.entity";
 import { setPlayerToInjuredState } from "@events/Death.event";
 import { RageShared } from "@shared/index";
 import { BankAccountEntity } from "@entities/Bank.entity";
+import { JobEntity } from "./Job.entity";
 
 @Entity({ name: "characters" })
 export class CharacterEntity {
@@ -15,6 +16,10 @@ export class CharacterEntity {
 
     @ManyToOne(() => AccountEntity, (account) => account.id)
     account: AccountEntity;
+
+    @OneToMany(() => JobEntity, (job) => job.character)
+    jobs: JobEntity[];
+
 
     @Column({ type: "int", width: 11, default: 0 })
     adminlevel: number = 0;
