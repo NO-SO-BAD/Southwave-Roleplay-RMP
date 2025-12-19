@@ -2,19 +2,39 @@
   "compilerOptions": {
     "target": "es5",
     "module": "commonjs",
-    "outDir": "../../client_packages/southwave",
-    "rootDir": "./src",
-    "types": ["@ragempcommunity/types-client"],
+    "lib": ["es2015", "dom"],
+
+    "baseUrl": "./src",
+    "paths": {
+      "@api": ["api/index.ts"],
+      "@assets/*": ["assets/*"],
+      "@classes/*": ["classes/*"],
+      "@events/*": ["clientevents/*"],
+      "@proc/*": ["clientprocs/*"],
+      "@modules/*": ["modules/*"],
+      "@handlers/*": ["handlers/*"],
+      "@json/*": ["json/*"],
+      "@prototype/*": ["prototype/*"],
+      "@shared": ["../../shared/index.ts"],
+      "@shared/*": ["../../shared/*"]
+    },
+
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
     "allowJs": false,
+    "noEmit": true,
     "noEmitOnError": false,
     "removeComments": true,
-    "noLib": false,
-
     "isolatedModules": false,
-    "verbatimModuleSyntax": false  // ← FIX MÁS IMPORTANTE
+    "verbatimModuleSyntax": false
   },
-  "include": ["src/**/*"]
+  "files": [
+    "../../node_modules/@ragempcommunity/types-client/index.d.ts"
+  ],
+  "include": [
+    "src/**/*",
+    "../shared/**/*"
+  ]
 }

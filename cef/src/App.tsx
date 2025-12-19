@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { HUD } from './components/HUD';
 import { MainMenu } from './components/MainMenu';
-import { GameChat } from './components/Chat';  // Chat custom
+//import { GameChat } from './components/Chat';  // Chat custom
 
 export default function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -60,7 +60,7 @@ export default function App() {
       <HUD stats={playerStats} />
 
       {/* Chat Custom */}
-      <GameChat />
+      {/* {<GameChat />} */}
 
       {/* Main Menu */}
       <MainMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />

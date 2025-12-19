@@ -1,1 +1,1 @@
-require('./southwave/index');
+require('./southwave/bundle');

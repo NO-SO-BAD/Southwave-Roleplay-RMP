@@ -1,9 +1,40 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "outDir": "../../packages/southwave-roleplay",
-    "rootDir": "./src",
-    "types": ["@ragempcommunity/types-server", "node"]
-  },
-  "include": ["src/**/*"]
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        "target": "es2020",
+        "module": "commonjs",
+
+        "moduleResolution": "node",
+        "outDir": "../../packages/server",
+        "sourceMap": false,
+        "declaration": false,
+        "alwaysStrict": true,
+        "diagnostics": true,
+        "pretty": true,
+        "allowJs": true,
+        "resolveJsonModule": true,
+        "esModuleInterop": true,
+        "downlevelIteration": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "useDefineForClassFields": false,
+        "paths": {
+            "@api": ["./api/index.ts"],
+            "@assets/*": ["./assets/*"],
+            "@classes/*": ["./classes/*"],
+            "@events/*": ["./serverevents/*"],
+            "@modules/*": ["./modules/*"],
+            "@entities/*": ["./database/entity/*"],
+            "@commands/*": ["./commands/*"],
+            "@prototype/*": ["./prototype/*"],
+            "@shared/*": ["../shared/*"],
+            "@map/*": ["./map/*"]
+        }
+    },
+    "files": [
+        "../../node_modules/@ragempcommunity/types-server/index.d.ts",
+        "./@types/index.d.ts"
+    ],
+    "include": ["./**/*"],
+    "exclude": ["node_modules", "../../../node_modules"]
 }
