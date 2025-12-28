@@ -11,6 +11,7 @@ const Ban_entity_1 = require("./entity/Ban.entity");
 const Inventory_entity_1 = require("./entity/Inventory.entity");
 const Vehicle_entity_1 = require("./entity/Vehicle.entity");
 const Bank_entity_1 = require("@entities/Bank.entity");
+const Job_entity_1 = require("./entity/Job.entity");
 // ============================================
 // CONFIGURACIÓN DE BASE DE DATOS (CREDENCIALES DIRECTAS)
 // ============================================
@@ -53,7 +54,8 @@ exports.MainDataSource = new typeorm_1.DataSource({
         Bank_entity_1.BankAccountEntity,
         Ban_entity_1.BanEntity,
         Inventory_entity_1.InventoryItemsEntity,
-        Vehicle_entity_1.VehicleEntity
+        Vehicle_entity_1.VehicleEntity,
+        Job_entity_1.JobEntity
     ],
     migrations: [],
     subscribers: [],

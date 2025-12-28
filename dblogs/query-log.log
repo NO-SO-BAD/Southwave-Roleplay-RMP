@@ -670,3 +670,447 @@ Parameters: {"x":414.88006591796875,"y":-806.0711059570312,"z":29.34235954284668
 Query: SELECT * FROM current_schema()
 Parameters: undefined
 -------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT version();
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: START TRANSACTION
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_database()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "table_schema", "table_name" FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'vehicles') OR ("table_schema" = 'public' AND "table_name" = 'inventory_items') OR ("table_schema" = 'public' AND "table_name" = 'bank_accounts') OR ("table_schema" = 'public' AND "table_name" = 'player_jobs') OR ("table_schema" = 'public' AND "table_name" = 'characters') OR ("table_schema" = 'public' AND "table_name" = 'accounts') OR ("table_schema" = 'public' AND "table_name" = 'bans')
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT TRUE FROM information_schema.columns WHERE table_name = 'pg_class' and column_name = 'relispartition'
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT columns.*, pg_catalog.col_description(('"' || table_catalog || '"."' || table_schema || '"."' || table_name || '"')::regclass::oid, ordinal_position) AS description, ('"' || "udt_schema" || '"."' || "udt_name" || '"')::"regtype" AS "regtype", pg_catalog.format_type("col_attr"."atttypid", "col_attr"."atttypmod") AS "format_type" FROM "information_schema"."columns" LEFT JOIN "pg_catalog"."pg_attribute" AS "col_attr" ON "col_attr"."attname" = "columns"."column_name" AND "col_attr"."attrelid" = ( SELECT "cls"."oid" FROM "pg_catalog"."pg_class" AS "cls" LEFT JOIN "pg_catalog"."pg_namespace" AS "ns" ON "ns"."oid" = "cls"."relnamespace" WHERE "cls"."relname" = "columns"."table_name" AND "ns"."nspname" = "columns"."table_schema" ) WHERE ("table_schema" = 'public' AND "table_name" = 'vehicles') OR ("table_schema" = 'public' AND "table_name" = 'inventory_items') OR ("table_schema" = 'public' AND "table_name" = 'bank_accounts') OR ("table_schema" = 'public' AND "table_name" = 'characters') OR ("table_schema" = 'public' AND "table_name" = 'accounts') OR ("table_schema" = 'public' AND "table_name" = 'bans')
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "cnst"."conname" AS "constraint_name", pg_get_constraintdef("cnst"."oid") AS "expression", CASE "cnst"."contype" WHEN 'p' THEN 'PRIMARY' WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' END AS "constraint_type", "a"."attname" AS "column_name" FROM "pg_constraint" "cnst" INNER JOIN "pg_class" "t" ON "t"."oid" = "cnst"."conrelid" INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "cnst"."connamespace" LEFT JOIN "pg_attribute" "a" ON "a"."attrelid" = "cnst"."conrelid" AND "a"."attnum" = ANY ("cnst"."conkey") WHERE "t"."relkind" IN ('r', 'p') AND (("ns"."nspname" = 'public' AND "t"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bans'))
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "i"."relname" AS "constraint_name", "a"."attname" AS "column_name", CASE "ix"."indisunique" WHEN 't' THEN 'TRUE' ELSE'FALSE' END AS "is_unique", pg_get_expr("ix"."indpred", "ix"."indrelid") AS "condition", "types"."typname" AS "type_name" FROM "pg_class" "t" INNER JOIN "pg_index" "ix" ON "ix"."indrelid" = "t"."oid" INNER JOIN "pg_attribute" "a" ON "a"."attrelid" = "t"."oid"  AND "a"."attnum" = ANY ("ix"."indkey") INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "t"."relnamespace" INNER JOIN "pg_class" "i" ON "i"."oid" = "ix"."indexrelid" INNER JOIN "pg_type" "types" ON "types"."oid" = "a"."atttypid" LEFT JOIN "pg_constraint" "cnst" ON "cnst"."conname" = "i"."relname" WHERE "t"."relkind" IN ('r', 'p') AND "cnst"."contype" IS NULL AND (("ns"."nspname" = 'public' AND "t"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bans'))
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "con"."conname" AS "constraint_name", "con"."nspname" AS "table_schema", "con"."relname" AS "table_name", "att2"."attname" AS "column_name", "ns"."nspname" AS "referenced_table_schema", "cl"."relname" AS "referenced_table_name", "att"."attname" AS "referenced_column_name", "con"."confdeltype" AS "on_delete", "con"."confupdtype" AS "on_update", "con"."condeferrable" AS "deferrable", "con"."condeferred" AS "deferred" FROM ( SELECT UNNEST ("con1"."conkey") AS "parent", UNNEST ("con1"."confkey") AS "child", "con1"."confrelid", "con1"."conrelid", "con1"."conname", "con1"."contype", "ns"."nspname", "cl"."relname", "con1"."condeferrable", CASE WHEN "con1"."condeferred" THEN 'INITIALLY DEFERRED' ELSE 'INITIALLY IMMEDIATE' END as condeferred, CASE "con1"."confdeltype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confdeltype", CASE "con1"."confupdtype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confupdtype" FROM "pg_class" "cl" INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_constraint" "con1" ON "con1"."conrelid" = "cl"."oid" WHERE "con1"."contype" = 'f' AND (("ns"."nspname" = 'public' AND "cl"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'bans')) ) "con" INNER JOIN "pg_attribute" "att" ON "att"."attrelid" = "con"."confrelid" AND "att"."attnum" = "con"."child" INNER JOIN "pg_class" "cl" ON "cl"."oid" = "con"."confrelid"  AND "cl"."relispartition" = 'f'INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_attribute" "att2" ON "att2"."attrelid" = "con"."conrelid" AND "att2"."attnum" = "con"."parent"
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: CREATE TABLE "player_jobs" ("id" SERIAL NOT NULL, "jobId" integer NOT NULL, "rankId" integer, "salary" numeric NOT NULL DEFAULT '0', "character_id" integer, CONSTRAINT "PK_e9b2c92a30099fc04332545c39c" PRIMARY KEY ("id"))
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: ALTER TABLE "player_jobs" ADD CONSTRAINT "FK_f2d9ad7220d7f170a75c4c60972" FOREIGN KEY ("character_id") REFERENCES "characters"("id") ON DELETE NO ACTION ON UPDATE NO ACTION
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: COMMIT
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT version();
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: START TRANSACTION
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_database()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "table_schema", "table_name" FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'vehicles') OR ("table_schema" = 'public' AND "table_name" = 'inventory_items') OR ("table_schema" = 'public' AND "table_name" = 'bank_accounts') OR ("table_schema" = 'public' AND "table_name" = 'player_jobs') OR ("table_schema" = 'public' AND "table_name" = 'characters') OR ("table_schema" = 'public' AND "table_name" = 'accounts') OR ("table_schema" = 'public' AND "table_name" = 'bans')
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT TRUE FROM information_schema.columns WHERE table_name = 'pg_class' and column_name = 'relispartition'
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT columns.*, pg_catalog.col_description(('"' || table_catalog || '"."' || table_schema || '"."' || table_name || '"')::regclass::oid, ordinal_position) AS description, ('"' || "udt_schema" || '"."' || "udt_name" || '"')::"regtype" AS "regtype", pg_catalog.format_type("col_attr"."atttypid", "col_attr"."atttypmod") AS "format_type" FROM "information_schema"."columns" LEFT JOIN "pg_catalog"."pg_attribute" AS "col_attr" ON "col_attr"."attname" = "columns"."column_name" AND "col_attr"."attrelid" = ( SELECT "cls"."oid" FROM "pg_catalog"."pg_class" AS "cls" LEFT JOIN "pg_catalog"."pg_namespace" AS "ns" ON "ns"."oid" = "cls"."relnamespace" WHERE "cls"."relname" = "columns"."table_name" AND "ns"."nspname" = "columns"."table_schema" ) WHERE ("table_schema" = 'public' AND "table_name" = 'vehicles') OR ("table_schema" = 'public' AND "table_name" = 'inventory_items') OR ("table_schema" = 'public' AND "table_name" = 'bank_accounts') OR ("table_schema" = 'public' AND "table_name" = 'characters') OR ("table_schema" = 'public' AND "table_name" = 'accounts') OR ("table_schema" = 'public' AND "table_name" = 'bans') OR ("table_schema" = 'public' AND "table_name" = 'player_jobs')
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "cnst"."conname" AS "constraint_name", pg_get_constraintdef("cnst"."oid") AS "expression", CASE "cnst"."contype" WHEN 'p' THEN 'PRIMARY' WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' END AS "constraint_type", "a"."attname" AS "column_name" FROM "pg_constraint" "cnst" INNER JOIN "pg_class" "t" ON "t"."oid" = "cnst"."conrelid" INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "cnst"."connamespace" LEFT JOIN "pg_attribute" "a" ON "a"."attrelid" = "cnst"."conrelid" AND "a"."attnum" = ANY ("cnst"."conkey") WHERE "t"."relkind" IN ('r', 'p') AND (("ns"."nspname" = 'public' AND "t"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'player_jobs'))
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "i"."relname" AS "constraint_name", "a"."attname" AS "column_name", CASE "ix"."indisunique" WHEN 't' THEN 'TRUE' ELSE'FALSE' END AS "is_unique", pg_get_expr("ix"."indpred", "ix"."indrelid") AS "condition", "types"."typname" AS "type_name" FROM "pg_class" "t" INNER JOIN "pg_index" "ix" ON "ix"."indrelid" = "t"."oid" INNER JOIN "pg_attribute" "a" ON "a"."attrelid" = "t"."oid"  AND "a"."attnum" = ANY ("ix"."indkey") INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "t"."relnamespace" INNER JOIN "pg_class" "i" ON "i"."oid" = "ix"."indexrelid" INNER JOIN "pg_type" "types" ON "types"."oid" = "a"."atttypid" LEFT JOIN "pg_constraint" "cnst" ON "cnst"."conname" = "i"."relname" WHERE "t"."relkind" IN ('r', 'p') AND "cnst"."contype" IS NULL AND (("ns"."nspname" = 'public' AND "t"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'player_jobs'))
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "con"."conname" AS "constraint_name", "con"."nspname" AS "table_schema", "con"."relname" AS "table_name", "att2"."attname" AS "column_name", "ns"."nspname" AS "referenced_table_schema", "cl"."relname" AS "referenced_table_name", "att"."attname" AS "referenced_column_name", "con"."confdeltype" AS "on_delete", "con"."confupdtype" AS "on_update", "con"."condeferrable" AS "deferrable", "con"."condeferred" AS "deferred" FROM ( SELECT UNNEST ("con1"."conkey") AS "parent", UNNEST ("con1"."confkey") AS "child", "con1"."confrelid", "con1"."conrelid", "con1"."conname", "con1"."contype", "ns"."nspname", "cl"."relname", "con1"."condeferrable", CASE WHEN "con1"."condeferred" THEN 'INITIALLY DEFERRED' ELSE 'INITIALLY IMMEDIATE' END as condeferred, CASE "con1"."confdeltype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confdeltype", CASE "con1"."confupdtype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confupdtype" FROM "pg_class" "cl" INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_constraint" "con1" ON "con1"."conrelid" = "cl"."oid" WHERE "con1"."contype" = 'f' AND (("ns"."nspname" = 'public' AND "cl"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'player_jobs')) ) "con" INNER JOIN "pg_attribute" "att" ON "att"."attrelid" = "con"."confrelid" AND "att"."attnum" = "con"."child" INNER JOIN "pg_class" "cl" ON "cl"."oid" = "con"."confrelid"  AND "cl"."relispartition" = 'f'INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_attribute" "att2" ON "att2"."attrelid" = "con"."conrelid" AND "att2"."attnum" = "con"."parent"
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: COMMIT
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "BanEntity"."id" AS "BanEntity_id", "BanEntity"."ip" AS "BanEntity_ip", "BanEntity"."rsgId" AS "BanEntity_rsgId", "BanEntity"."username" AS "BanEntity_username", "BanEntity"."serial" AS "BanEntity_serial", "BanEntity"."reason" AS "BanEntity_reason", "BanEntity"."bannedBy" AS "BanEntity_bannedBy", "BanEntity"."bannedByLevel" AS "BanEntity_bannedByLevel", "BanEntity"."lifttime" AS "BanEntity_lifttime" FROM "bans" "BanEntity" WHERE (("BanEntity"."serial" = $1) OR ("BanEntity"."ip" = $2) OR ("BanEntity"."username" = $3) OR ("BanEntity"."rsgId" = $4)) LIMIT 1
+Parameters: DEB488D000D25078C2F47EA05270C5E07A301C00DF2039B0E2E4E8D8E88AE240D86800ECF0FA9ED04A305E604FE40680B400F9C0BB8CBEB078E4D814E6C4A280,127.0.0.1,tacticalwired,256659239
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "AccountEntity"."id" AS "AccountEntity_id", "AccountEntity"."username" AS "AccountEntity_username", "AccountEntity"."password" AS "AccountEntity_password", "AccountEntity"."email" AS "AccountEntity_email", "AccountEntity"."socialClubId" AS "AccountEntity_socialClubId" FROM "accounts" "AccountEntity" WHERE ("AccountEntity"."username" = $1) LIMIT 1
+Parameters: tacticalwired
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "AccountEntity"."id" AS "AccountEntity_id", "AccountEntity"."username" AS "AccountEntity_username", "AccountEntity"."password" AS "AccountEntity_password", "AccountEntity"."email" AS "AccountEntity_email", "AccountEntity"."socialClubId" AS "AccountEntity_socialClubId" FROM "accounts" "AccountEntity" WHERE ("AccountEntity"."username" = $1) LIMIT 1
+Parameters: tacticalwired
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "AccountEntity"."id" AS "AccountEntity_id", "AccountEntity"."username" AS "AccountEntity_username", "AccountEntity"."password" AS "AccountEntity_password", "AccountEntity"."email" AS "AccountEntity_email", "AccountEntity"."socialClubId" AS "AccountEntity_socialClubId" FROM "accounts" "AccountEntity" WHERE ("AccountEntity"."username" = $1) LIMIT 1
+Parameters: tacticalwired
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "AccountEntity"."id" AS "AccountEntity_id", "AccountEntity"."username" AS "AccountEntity_username", "AccountEntity"."password" AS "AccountEntity_password", "AccountEntity"."email" AS "AccountEntity_email", "AccountEntity"."socialClubId" AS "AccountEntity_socialClubId" FROM "accounts" "AccountEntity" WHERE ("AccountEntity"."username" = $1) LIMIT 1
+Parameters: tacticalwired
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "AccountEntity"."id" AS "AccountEntity_id", "AccountEntity"."username" AS "AccountEntity_username", "AccountEntity"."password" AS "AccountEntity_password", "AccountEntity"."email" AS "AccountEntity_email", "AccountEntity"."socialClubId" AS "AccountEntity_socialClubId" FROM "accounts" "AccountEntity" WHERE ("AccountEntity"."username" = $1) LIMIT 1
+Parameters: tacticalwired
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "AccountEntity"."id" AS "AccountEntity_id", "AccountEntity"."username" AS "AccountEntity_username", "AccountEntity"."password" AS "AccountEntity_password", "AccountEntity"."email" AS "AccountEntity_email", "AccountEntity"."socialClubId" AS "AccountEntity_socialClubId" FROM "accounts" "AccountEntity" WHERE ("AccountEntity"."username" = $1) LIMIT 1
+Parameters: tacticalwired
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "AccountEntity"."id" AS "AccountEntity_id", "AccountEntity"."username" AS "AccountEntity_username", "AccountEntity"."password" AS "AccountEntity_password", "AccountEntity"."email" AS "AccountEntity_email", "AccountEntity"."socialClubId" AS "AccountEntity_socialClubId" FROM "accounts" "AccountEntity" WHERE ("AccountEntity"."username" = $1) LIMIT 1
+Parameters: tacticalwired
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "AccountEntity"."id" AS "AccountEntity_id", "AccountEntity"."username" AS "AccountEntity_username", "AccountEntity"."password" AS "AccountEntity_password", "AccountEntity"."email" AS "AccountEntity_email", "AccountEntity"."socialClubId" AS "AccountEntity_socialClubId" FROM "accounts" "AccountEntity" WHERE ("AccountEntity"."username" = $1) LIMIT 1
+Parameters: tacticalwired
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "AccountEntity"."id" AS "AccountEntity_id", "AccountEntity"."username" AS "AccountEntity_username", "AccountEntity"."password" AS "AccountEntity_password", "AccountEntity"."email" AS "AccountEntity_email", "AccountEntity"."socialClubId" AS "AccountEntity_socialClubId" FROM "accounts" "AccountEntity" WHERE ("AccountEntity"."username" = $1) LIMIT 1
+Parameters: tacticalwired
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "AccountEntity"."id" AS "AccountEntity_id", "AccountEntity"."username" AS "AccountEntity_username", "AccountEntity"."password" AS "AccountEntity_password", "AccountEntity"."email" AS "AccountEntity_email", "AccountEntity"."socialClubId" AS "AccountEntity_socialClubId" FROM "accounts" "AccountEntity" WHERE ("AccountEntity"."username" = $1) LIMIT 1
+Parameters: tacticalwired
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "AccountEntity"."id" AS "AccountEntity_id", "AccountEntity"."username" AS "AccountEntity_username", "AccountEntity"."password" AS "AccountEntity_password", "AccountEntity"."email" AS "AccountEntity_email", "AccountEntity"."socialClubId" AS "AccountEntity_socialClubId" FROM "accounts" "AccountEntity" WHERE ("AccountEntity"."username" = $1) LIMIT 1
+Parameters: tacticalwired
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT DISTINCT "distinctAlias"."CharacterEntity_id" AS "ids_CharacterEntity_id" FROM (SELECT "CharacterEntity"."id" AS "CharacterEntity_id", "CharacterEntity"."adminlevel" AS "CharacterEntity_adminlevel", "CharacterEntity"."appearance" AS "CharacterEntity_appearance", "CharacterEntity"."lastlogin" AS "CharacterEntity_lastlogin", "CharacterEntity"."name" AS "CharacterEntity_name", "CharacterEntity"."gender" AS "CharacterEntity_gender", "CharacterEntity"."level" AS "CharacterEntity_level", "CharacterEntity"."position" AS "CharacterEntity_position", "CharacterEntity"."wantedLevel" AS "CharacterEntity_wantedLevel", "CharacterEntity"."deathState" AS "CharacterEntity_deathState", "CharacterEntity"."cash" AS "CharacterEntity_cash", "CharacterEntity"."accountId" AS "CharacterEntity_accountId", "CharacterEntity"."itemsId" AS "CharacterEntity_itemsId" FROM "characters" "CharacterEntity" LEFT JOIN "accounts" "CharacterEntity__CharacterEntity_account" ON "CharacterEntity__CharacterEntity_account"."id"="CharacterEntity"."accountId" WHERE ("CharacterEntity__CharacterEntity_account"."id" = $1)) "distinctAlias" ORDER BY "CharacterEntity_id" ASC LIMIT 3
+Parameters: 1
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "CharacterEntity"."id" AS "CharacterEntity_id", "CharacterEntity"."adminlevel" AS "CharacterEntity_adminlevel", "CharacterEntity"."appearance" AS "CharacterEntity_appearance", "CharacterEntity"."lastlogin" AS "CharacterEntity_lastlogin", "CharacterEntity"."name" AS "CharacterEntity_name", "CharacterEntity"."gender" AS "CharacterEntity_gender", "CharacterEntity"."level" AS "CharacterEntity_level", "CharacterEntity"."position" AS "CharacterEntity_position", "CharacterEntity"."wantedLevel" AS "CharacterEntity_wantedLevel", "CharacterEntity"."deathState" AS "CharacterEntity_deathState", "CharacterEntity"."cash" AS "CharacterEntity_cash", "CharacterEntity"."accountId" AS "CharacterEntity_accountId", "CharacterEntity"."itemsId" AS "CharacterEntity_itemsId" FROM "characters" "CharacterEntity" LEFT JOIN "accounts" "CharacterEntity__CharacterEntity_account" ON "CharacterEntity__CharacterEntity_account"."id"="CharacterEntity"."accountId" WHERE ( ("CharacterEntity__CharacterEntity_account"."id" = $1) ) AND ( "CharacterEntity"."id" IN (1) )
+Parameters: 1
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT DISTINCT "distinctAlias"."CharacterEntity_id" AS "ids_CharacterEntity_id" FROM (SELECT "CharacterEntity"."id" AS "CharacterEntity_id", "CharacterEntity"."adminlevel" AS "CharacterEntity_adminlevel", "CharacterEntity"."appearance" AS "CharacterEntity_appearance", "CharacterEntity"."lastlogin" AS "CharacterEntity_lastlogin", "CharacterEntity"."name" AS "CharacterEntity_name", "CharacterEntity"."gender" AS "CharacterEntity_gender", "CharacterEntity"."level" AS "CharacterEntity_level", "CharacterEntity"."position" AS "CharacterEntity_position", "CharacterEntity"."wantedLevel" AS "CharacterEntity_wantedLevel", "CharacterEntity"."deathState" AS "CharacterEntity_deathState", "CharacterEntity"."cash" AS "CharacterEntity_cash", "CharacterEntity"."accountId" AS "CharacterEntity_accountId", "CharacterEntity"."itemsId" AS "CharacterEntity_itemsId", "CharacterEntity__CharacterEntity_items"."id" AS "CharacterEntity__CharacterEntity_items_id", "CharacterEntity__CharacterEntity_items"."clothes" AS "CharacterEntity__CharacterEntity_items_clothes", "CharacterEntity__CharacterEntity_items"."pockets" AS "CharacterEntity__CharacterEntity_items_pockets", "CharacterEntity__CharacterEntity_items"."quickUse" AS "CharacterEntity__CharacterEntity_items_quickUse", "CharacterEntity__CharacterEntity_bank"."id" AS "CharacterEntity__CharacterEntity_bank_id", "CharacterEntity__CharacterEntity_bank"."isPrimary" AS "CharacterEntity__CharacterEntity_bank_isPrimary", "CharacterEntity__CharacterEntity_bank"."accountnumber" AS "CharacterEntity__CharacterEntity_bank_accountnumber", "CharacterEntity__CharacterEntity_bank"."pincode" AS "CharacterEntity__CharacterEntity_bank_pincode", "CharacterEntity__CharacterEntity_bank"."balance" AS "CharacterEntity__CharacterEntity_bank_balance", "CharacterEntity__CharacterEntity_bank"."accountholder" AS "CharacterEntity__CharacterEntity_bank_accountholder", "CharacterEntity__CharacterEntity_bank"."characterId" AS "CharacterEntity__CharacterEntity_bank_characterId" FROM "characters" "CharacterEntity" LEFT JOIN "inventory_items" "CharacterEntity__CharacterEntity_items" ON "CharacterEntity__CharacterEntity_items"."id"="CharacterEntity"."itemsId"  LEFT JOIN "bank_accounts" "CharacterEntity__CharacterEntity_bank" ON "CharacterEntity__CharacterEntity_bank"."characterId"="CharacterEntity"."id" WHERE ("CharacterEntity"."id" = $1)) "distinctAlias" ORDER BY "CharacterEntity_id" ASC LIMIT 1
+Parameters: 1
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "CharacterEntity"."id" AS "CharacterEntity_id", "CharacterEntity"."adminlevel" AS "CharacterEntity_adminlevel", "CharacterEntity"."appearance" AS "CharacterEntity_appearance", "CharacterEntity"."lastlogin" AS "CharacterEntity_lastlogin", "CharacterEntity"."name" AS "CharacterEntity_name", "CharacterEntity"."gender" AS "CharacterEntity_gender", "CharacterEntity"."level" AS "CharacterEntity_level", "CharacterEntity"."position" AS "CharacterEntity_position", "CharacterEntity"."wantedLevel" AS "CharacterEntity_wantedLevel", "CharacterEntity"."deathState" AS "CharacterEntity_deathState", "CharacterEntity"."cash" AS "CharacterEntity_cash", "CharacterEntity"."accountId" AS "CharacterEntity_accountId", "CharacterEntity"."itemsId" AS "CharacterEntity_itemsId", "CharacterEntity__CharacterEntity_items"."id" AS "CharacterEntity__CharacterEntity_items_id", "CharacterEntity__CharacterEntity_items"."clothes" AS "CharacterEntity__CharacterEntity_items_clothes", "CharacterEntity__CharacterEntity_items"."pockets" AS "CharacterEntity__CharacterEntity_items_pockets", "CharacterEntity__CharacterEntity_items"."quickUse" AS "CharacterEntity__CharacterEntity_items_quickUse", "CharacterEntity__CharacterEntity_bank"."id" AS "CharacterEntity__CharacterEntity_bank_id", "CharacterEntity__CharacterEntity_bank"."isPrimary" AS "CharacterEntity__CharacterEntity_bank_isPrimary", "CharacterEntity__CharacterEntity_bank"."accountnumber" AS "CharacterEntity__CharacterEntity_bank_accountnumber", "CharacterEntity__CharacterEntity_bank"."pincode" AS "CharacterEntity__CharacterEntity_bank_pincode", "CharacterEntity__CharacterEntity_bank"."balance" AS "CharacterEntity__CharacterEntity_bank_balance", "CharacterEntity__CharacterEntity_bank"."accountholder" AS "CharacterEntity__CharacterEntity_bank_accountholder", "CharacterEntity__CharacterEntity_bank"."characterId" AS "CharacterEntity__CharacterEntity_bank_characterId" FROM "characters" "CharacterEntity" LEFT JOIN "inventory_items" "CharacterEntity__CharacterEntity_items" ON "CharacterEntity__CharacterEntity_items"."id"="CharacterEntity"."itemsId"  LEFT JOIN "bank_accounts" "CharacterEntity__CharacterEntity_bank" ON "CharacterEntity__CharacterEntity_bank"."characterId"="CharacterEntity"."id" WHERE ( ("CharacterEntity"."id" = $1) ) AND ( "CharacterEntity"."id" IN (1) )
+Parameters: 1
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: UPDATE "characters" SET "position" = $1, "lastlogin" = $2, "deathState" = $3, "cash" = $4 WHERE "id" IN ($5)
+Parameters: {"x":395.938232421875,"y":-947.987060546875,"z":29.339332580566406,"heading":175.9442901611328},Sat Dec 20 2025 10:49:15 GMT-0300 (GMT-03:00),0,1500,1
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT version();
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: START TRANSACTION
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_database()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "table_schema", "table_name" FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'vehicles') OR ("table_schema" = 'public' AND "table_name" = 'inventory_items') OR ("table_schema" = 'public' AND "table_name" = 'bank_accounts') OR ("table_schema" = 'public' AND "table_name" = 'player_jobs') OR ("table_schema" = 'public' AND "table_name" = 'characters') OR ("table_schema" = 'public' AND "table_name" = 'accounts') OR ("table_schema" = 'public' AND "table_name" = 'bans')
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT TRUE FROM information_schema.columns WHERE table_name = 'pg_class' and column_name = 'relispartition'
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT columns.*, pg_catalog.col_description(('"' || table_catalog || '"."' || table_schema || '"."' || table_name || '"')::regclass::oid, ordinal_position) AS description, ('"' || "udt_schema" || '"."' || "udt_name" || '"')::"regtype" AS "regtype", pg_catalog.format_type("col_attr"."atttypid", "col_attr"."atttypmod") AS "format_type" FROM "information_schema"."columns" LEFT JOIN "pg_catalog"."pg_attribute" AS "col_attr" ON "col_attr"."attname" = "columns"."column_name" AND "col_attr"."attrelid" = ( SELECT "cls"."oid" FROM "pg_catalog"."pg_class" AS "cls" LEFT JOIN "pg_catalog"."pg_namespace" AS "ns" ON "ns"."oid" = "cls"."relnamespace" WHERE "cls"."relname" = "columns"."table_name" AND "ns"."nspname" = "columns"."table_schema" ) WHERE ("table_schema" = 'public' AND "table_name" = 'vehicles') OR ("table_schema" = 'public' AND "table_name" = 'inventory_items') OR ("table_schema" = 'public' AND "table_name" = 'bank_accounts') OR ("table_schema" = 'public' AND "table_name" = 'characters') OR ("table_schema" = 'public' AND "table_name" = 'accounts') OR ("table_schema" = 'public' AND "table_name" = 'bans') OR ("table_schema" = 'public' AND "table_name" = 'player_jobs')
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "cnst"."conname" AS "constraint_name", pg_get_constraintdef("cnst"."oid") AS "expression", CASE "cnst"."contype" WHEN 'p' THEN 'PRIMARY' WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' END AS "constraint_type", "a"."attname" AS "column_name" FROM "pg_constraint" "cnst" INNER JOIN "pg_class" "t" ON "t"."oid" = "cnst"."conrelid" INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "cnst"."connamespace" LEFT JOIN "pg_attribute" "a" ON "a"."attrelid" = "cnst"."conrelid" AND "a"."attnum" = ANY ("cnst"."conkey") WHERE "t"."relkind" IN ('r', 'p') AND (("ns"."nspname" = 'public' AND "t"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'player_jobs'))
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "i"."relname" AS "constraint_name", "a"."attname" AS "column_name", CASE "ix"."indisunique" WHEN 't' THEN 'TRUE' ELSE'FALSE' END AS "is_unique", pg_get_expr("ix"."indpred", "ix"."indrelid") AS "condition", "types"."typname" AS "type_name" FROM "pg_class" "t" INNER JOIN "pg_index" "ix" ON "ix"."indrelid" = "t"."oid" INNER JOIN "pg_attribute" "a" ON "a"."attrelid" = "t"."oid"  AND "a"."attnum" = ANY ("ix"."indkey") INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "t"."relnamespace" INNER JOIN "pg_class" "i" ON "i"."oid" = "ix"."indexrelid" INNER JOIN "pg_type" "types" ON "types"."oid" = "a"."atttypid" LEFT JOIN "pg_constraint" "cnst" ON "cnst"."conname" = "i"."relname" WHERE "t"."relkind" IN ('r', 'p') AND "cnst"."contype" IS NULL AND (("ns"."nspname" = 'public' AND "t"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'player_jobs'))
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "con"."conname" AS "constraint_name", "con"."nspname" AS "table_schema", "con"."relname" AS "table_name", "att2"."attname" AS "column_name", "ns"."nspname" AS "referenced_table_schema", "cl"."relname" AS "referenced_table_name", "att"."attname" AS "referenced_column_name", "con"."confdeltype" AS "on_delete", "con"."confupdtype" AS "on_update", "con"."condeferrable" AS "deferrable", "con"."condeferred" AS "deferred" FROM ( SELECT UNNEST ("con1"."conkey") AS "parent", UNNEST ("con1"."confkey") AS "child", "con1"."confrelid", "con1"."conrelid", "con1"."conname", "con1"."contype", "ns"."nspname", "cl"."relname", "con1"."condeferrable", CASE WHEN "con1"."condeferred" THEN 'INITIALLY DEFERRED' ELSE 'INITIALLY IMMEDIATE' END as condeferred, CASE "con1"."confdeltype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confdeltype", CASE "con1"."confupdtype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confupdtype" FROM "pg_class" "cl" INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_constraint" "con1" ON "con1"."conrelid" = "cl"."oid" WHERE "con1"."contype" = 'f' AND (("ns"."nspname" = 'public' AND "cl"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'player_jobs')) ) "con" INNER JOIN "pg_attribute" "att" ON "att"."attrelid" = "con"."confrelid" AND "att"."attnum" = "con"."child" INNER JOIN "pg_class" "cl" ON "cl"."oid" = "con"."confrelid"  AND "cl"."relispartition" = 'f'INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_attribute" "att2" ON "att2"."attrelid" = "con"."conrelid" AND "att2"."attnum" = "con"."parent"
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: COMMIT
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT version();
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: START TRANSACTION
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_database()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "table_schema", "table_name" FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'vehicles') OR ("table_schema" = 'public' AND "table_name" = 'inventory_items') OR ("table_schema" = 'public' AND "table_name" = 'bank_accounts') OR ("table_schema" = 'public' AND "table_name" = 'player_jobs') OR ("table_schema" = 'public' AND "table_name" = 'characters') OR ("table_schema" = 'public' AND "table_name" = 'accounts') OR ("table_schema" = 'public' AND "table_name" = 'bans')
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT TRUE FROM information_schema.columns WHERE table_name = 'pg_class' and column_name = 'relispartition'
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT columns.*, pg_catalog.col_description(('"' || table_catalog || '"."' || table_schema || '"."' || table_name || '"')::regclass::oid, ordinal_position) AS description, ('"' || "udt_schema" || '"."' || "udt_name" || '"')::"regtype" AS "regtype", pg_catalog.format_type("col_attr"."atttypid", "col_attr"."atttypmod") AS "format_type" FROM "information_schema"."columns" LEFT JOIN "pg_catalog"."pg_attribute" AS "col_attr" ON "col_attr"."attname" = "columns"."column_name" AND "col_attr"."attrelid" = ( SELECT "cls"."oid" FROM "pg_catalog"."pg_class" AS "cls" LEFT JOIN "pg_catalog"."pg_namespace" AS "ns" ON "ns"."oid" = "cls"."relnamespace" WHERE "cls"."relname" = "columns"."table_name" AND "ns"."nspname" = "columns"."table_schema" ) WHERE ("table_schema" = 'public' AND "table_name" = 'vehicles') OR ("table_schema" = 'public' AND "table_name" = 'inventory_items') OR ("table_schema" = 'public' AND "table_name" = 'bank_accounts') OR ("table_schema" = 'public' AND "table_name" = 'characters') OR ("table_schema" = 'public' AND "table_name" = 'accounts') OR ("table_schema" = 'public' AND "table_name" = 'bans') OR ("table_schema" = 'public' AND "table_name" = 'player_jobs')
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "cnst"."conname" AS "constraint_name", pg_get_constraintdef("cnst"."oid") AS "expression", CASE "cnst"."contype" WHEN 'p' THEN 'PRIMARY' WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' END AS "constraint_type", "a"."attname" AS "column_name" FROM "pg_constraint" "cnst" INNER JOIN "pg_class" "t" ON "t"."oid" = "cnst"."conrelid" INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "cnst"."connamespace" LEFT JOIN "pg_attribute" "a" ON "a"."attrelid" = "cnst"."conrelid" AND "a"."attnum" = ANY ("cnst"."conkey") WHERE "t"."relkind" IN ('r', 'p') AND (("ns"."nspname" = 'public' AND "t"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'player_jobs'))
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "i"."relname" AS "constraint_name", "a"."attname" AS "column_name", CASE "ix"."indisunique" WHEN 't' THEN 'TRUE' ELSE'FALSE' END AS "is_unique", pg_get_expr("ix"."indpred", "ix"."indrelid") AS "condition", "types"."typname" AS "type_name" FROM "pg_class" "t" INNER JOIN "pg_index" "ix" ON "ix"."indrelid" = "t"."oid" INNER JOIN "pg_attribute" "a" ON "a"."attrelid" = "t"."oid"  AND "a"."attnum" = ANY ("ix"."indkey") INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "t"."relnamespace" INNER JOIN "pg_class" "i" ON "i"."oid" = "ix"."indexrelid" INNER JOIN "pg_type" "types" ON "types"."oid" = "a"."atttypid" LEFT JOIN "pg_constraint" "cnst" ON "cnst"."conname" = "i"."relname" WHERE "t"."relkind" IN ('r', 'p') AND "cnst"."contype" IS NULL AND (("ns"."nspname" = 'public' AND "t"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'player_jobs'))
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "con"."conname" AS "constraint_name", "con"."nspname" AS "table_schema", "con"."relname" AS "table_name", "att2"."attname" AS "column_name", "ns"."nspname" AS "referenced_table_schema", "cl"."relname" AS "referenced_table_name", "att"."attname" AS "referenced_column_name", "con"."confdeltype" AS "on_delete", "con"."confupdtype" AS "on_update", "con"."condeferrable" AS "deferrable", "con"."condeferred" AS "deferred" FROM ( SELECT UNNEST ("con1"."conkey") AS "parent", UNNEST ("con1"."confkey") AS "child", "con1"."confrelid", "con1"."conrelid", "con1"."conname", "con1"."contype", "ns"."nspname", "cl"."relname", "con1"."condeferrable", CASE WHEN "con1"."condeferred" THEN 'INITIALLY DEFERRED' ELSE 'INITIALLY IMMEDIATE' END as condeferred, CASE "con1"."confdeltype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confdeltype", CASE "con1"."confupdtype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confupdtype" FROM "pg_class" "cl" INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_constraint" "con1" ON "con1"."conrelid" = "cl"."oid" WHERE "con1"."contype" = 'f' AND (("ns"."nspname" = 'public' AND "cl"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'player_jobs')) ) "con" INNER JOIN "pg_attribute" "att" ON "att"."attrelid" = "con"."confrelid" AND "att"."attnum" = "con"."child" INNER JOIN "pg_class" "cl" ON "cl"."oid" = "con"."confrelid"  AND "cl"."relispartition" = 'f'INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_attribute" "att2" ON "att2"."attrelid" = "con"."conrelid" AND "att2"."attnum" = "con"."parent"
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: COMMIT
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "BanEntity"."id" AS "BanEntity_id", "BanEntity"."ip" AS "BanEntity_ip", "BanEntity"."rsgId" AS "BanEntity_rsgId", "BanEntity"."username" AS "BanEntity_username", "BanEntity"."serial" AS "BanEntity_serial", "BanEntity"."reason" AS "BanEntity_reason", "BanEntity"."bannedBy" AS "BanEntity_bannedBy", "BanEntity"."bannedByLevel" AS "BanEntity_bannedByLevel", "BanEntity"."lifttime" AS "BanEntity_lifttime" FROM "bans" "BanEntity" WHERE (("BanEntity"."serial" = $1) OR ("BanEntity"."ip" = $2) OR ("BanEntity"."username" = $3) OR ("BanEntity"."rsgId" = $4)) LIMIT 1
+Parameters: DEB488D000D25078C2F47EA05270C5E07A301C00DF2039B0E2E4E8D8E88AE240D86800ECF0FA9ED04A305E604FE40680B400F9C0BB8CBEB078E4D814E6C4A280,127.0.0.1,tacticalwired,256659239
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "AccountEntity"."id" AS "AccountEntity_id", "AccountEntity"."username" AS "AccountEntity_username", "AccountEntity"."password" AS "AccountEntity_password", "AccountEntity"."email" AS "AccountEntity_email", "AccountEntity"."socialClubId" AS "AccountEntity_socialClubId" FROM "accounts" "AccountEntity" WHERE ("AccountEntity"."username" = $1) LIMIT 1
+Parameters: tacticalwired
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT DISTINCT "distinctAlias"."CharacterEntity_id" AS "ids_CharacterEntity_id" FROM (SELECT "CharacterEntity"."id" AS "CharacterEntity_id", "CharacterEntity"."adminlevel" AS "CharacterEntity_adminlevel", "CharacterEntity"."appearance" AS "CharacterEntity_appearance", "CharacterEntity"."lastlogin" AS "CharacterEntity_lastlogin", "CharacterEntity"."name" AS "CharacterEntity_name", "CharacterEntity"."gender" AS "CharacterEntity_gender", "CharacterEntity"."level" AS "CharacterEntity_level", "CharacterEntity"."position" AS "CharacterEntity_position", "CharacterEntity"."wantedLevel" AS "CharacterEntity_wantedLevel", "CharacterEntity"."deathState" AS "CharacterEntity_deathState", "CharacterEntity"."cash" AS "CharacterEntity_cash", "CharacterEntity"."accountId" AS "CharacterEntity_accountId", "CharacterEntity"."itemsId" AS "CharacterEntity_itemsId" FROM "characters" "CharacterEntity" LEFT JOIN "accounts" "CharacterEntity__CharacterEntity_account" ON "CharacterEntity__CharacterEntity_account"."id"="CharacterEntity"."accountId" WHERE ("CharacterEntity__CharacterEntity_account"."id" = $1)) "distinctAlias" ORDER BY "CharacterEntity_id" ASC LIMIT 3
+Parameters: 1
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "CharacterEntity"."id" AS "CharacterEntity_id", "CharacterEntity"."adminlevel" AS "CharacterEntity_adminlevel", "CharacterEntity"."appearance" AS "CharacterEntity_appearance", "CharacterEntity"."lastlogin" AS "CharacterEntity_lastlogin", "CharacterEntity"."name" AS "CharacterEntity_name", "CharacterEntity"."gender" AS "CharacterEntity_gender", "CharacterEntity"."level" AS "CharacterEntity_level", "CharacterEntity"."position" AS "CharacterEntity_position", "CharacterEntity"."wantedLevel" AS "CharacterEntity_wantedLevel", "CharacterEntity"."deathState" AS "CharacterEntity_deathState", "CharacterEntity"."cash" AS "CharacterEntity_cash", "CharacterEntity"."accountId" AS "CharacterEntity_accountId", "CharacterEntity"."itemsId" AS "CharacterEntity_itemsId" FROM "characters" "CharacterEntity" LEFT JOIN "accounts" "CharacterEntity__CharacterEntity_account" ON "CharacterEntity__CharacterEntity_account"."id"="CharacterEntity"."accountId" WHERE ( ("CharacterEntity__CharacterEntity_account"."id" = $1) ) AND ( "CharacterEntity"."id" IN (1) )
+Parameters: 1
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT DISTINCT "distinctAlias"."CharacterEntity_id" AS "ids_CharacterEntity_id" FROM (SELECT "CharacterEntity"."id" AS "CharacterEntity_id", "CharacterEntity"."adminlevel" AS "CharacterEntity_adminlevel", "CharacterEntity"."appearance" AS "CharacterEntity_appearance", "CharacterEntity"."lastlogin" AS "CharacterEntity_lastlogin", "CharacterEntity"."name" AS "CharacterEntity_name", "CharacterEntity"."gender" AS "CharacterEntity_gender", "CharacterEntity"."level" AS "CharacterEntity_level", "CharacterEntity"."position" AS "CharacterEntity_position", "CharacterEntity"."wantedLevel" AS "CharacterEntity_wantedLevel", "CharacterEntity"."deathState" AS "CharacterEntity_deathState", "CharacterEntity"."cash" AS "CharacterEntity_cash", "CharacterEntity"."accountId" AS "CharacterEntity_accountId", "CharacterEntity"."itemsId" AS "CharacterEntity_itemsId", "CharacterEntity__CharacterEntity_items"."id" AS "CharacterEntity__CharacterEntity_items_id", "CharacterEntity__CharacterEntity_items"."clothes" AS "CharacterEntity__CharacterEntity_items_clothes", "CharacterEntity__CharacterEntity_items"."pockets" AS "CharacterEntity__CharacterEntity_items_pockets", "CharacterEntity__CharacterEntity_items"."quickUse" AS "CharacterEntity__CharacterEntity_items_quickUse", "CharacterEntity__CharacterEntity_bank"."id" AS "CharacterEntity__CharacterEntity_bank_id", "CharacterEntity__CharacterEntity_bank"."isPrimary" AS "CharacterEntity__CharacterEntity_bank_isPrimary", "CharacterEntity__CharacterEntity_bank"."accountnumber" AS "CharacterEntity__CharacterEntity_bank_accountnumber", "CharacterEntity__CharacterEntity_bank"."pincode" AS "CharacterEntity__CharacterEntity_bank_pincode", "CharacterEntity__CharacterEntity_bank"."balance" AS "CharacterEntity__CharacterEntity_bank_balance", "CharacterEntity__CharacterEntity_bank"."accountholder" AS "CharacterEntity__CharacterEntity_bank_accountholder", "CharacterEntity__CharacterEntity_bank"."characterId" AS "CharacterEntity__CharacterEntity_bank_characterId" FROM "characters" "CharacterEntity" LEFT JOIN "inventory_items" "CharacterEntity__CharacterEntity_items" ON "CharacterEntity__CharacterEntity_items"."id"="CharacterEntity"."itemsId"  LEFT JOIN "bank_accounts" "CharacterEntity__CharacterEntity_bank" ON "CharacterEntity__CharacterEntity_bank"."characterId"="CharacterEntity"."id" WHERE ("CharacterEntity"."id" = $1)) "distinctAlias" ORDER BY "CharacterEntity_id" ASC LIMIT 1
+Parameters: 1
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "CharacterEntity"."id" AS "CharacterEntity_id", "CharacterEntity"."adminlevel" AS "CharacterEntity_adminlevel", "CharacterEntity"."appearance" AS "CharacterEntity_appearance", "CharacterEntity"."lastlogin" AS "CharacterEntity_lastlogin", "CharacterEntity"."name" AS "CharacterEntity_name", "CharacterEntity"."gender" AS "CharacterEntity_gender", "CharacterEntity"."level" AS "CharacterEntity_level", "CharacterEntity"."position" AS "CharacterEntity_position", "CharacterEntity"."wantedLevel" AS "CharacterEntity_wantedLevel", "CharacterEntity"."deathState" AS "CharacterEntity_deathState", "CharacterEntity"."cash" AS "CharacterEntity_cash", "CharacterEntity"."accountId" AS "CharacterEntity_accountId", "CharacterEntity"."itemsId" AS "CharacterEntity_itemsId", "CharacterEntity__CharacterEntity_items"."id" AS "CharacterEntity__CharacterEntity_items_id", "CharacterEntity__CharacterEntity_items"."clothes" AS "CharacterEntity__CharacterEntity_items_clothes", "CharacterEntity__CharacterEntity_items"."pockets" AS "CharacterEntity__CharacterEntity_items_pockets", "CharacterEntity__CharacterEntity_items"."quickUse" AS "CharacterEntity__CharacterEntity_items_quickUse", "CharacterEntity__CharacterEntity_bank"."id" AS "CharacterEntity__CharacterEntity_bank_id", "CharacterEntity__CharacterEntity_bank"."isPrimary" AS "CharacterEntity__CharacterEntity_bank_isPrimary", "CharacterEntity__CharacterEntity_bank"."accountnumber" AS "CharacterEntity__CharacterEntity_bank_accountnumber", "CharacterEntity__CharacterEntity_bank"."pincode" AS "CharacterEntity__CharacterEntity_bank_pincode", "CharacterEntity__CharacterEntity_bank"."balance" AS "CharacterEntity__CharacterEntity_bank_balance", "CharacterEntity__CharacterEntity_bank"."accountholder" AS "CharacterEntity__CharacterEntity_bank_accountholder", "CharacterEntity__CharacterEntity_bank"."characterId" AS "CharacterEntity__CharacterEntity_bank_characterId" FROM "characters" "CharacterEntity" LEFT JOIN "inventory_items" "CharacterEntity__CharacterEntity_items" ON "CharacterEntity__CharacterEntity_items"."id"="CharacterEntity"."itemsId"  LEFT JOIN "bank_accounts" "CharacterEntity__CharacterEntity_bank" ON "CharacterEntity__CharacterEntity_bank"."characterId"="CharacterEntity"."id" WHERE ( ("CharacterEntity"."id" = $1) ) AND ( "CharacterEntity"."id" IN (1) )
+Parameters: 1
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: UPDATE "inventory_items" SET "pockets" = $1, "clothes" = $2, "quickUse" = $3 WHERE "id" = $4
+Parameters: {"0":null,"1":null,"2":null,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null,"13":null,"14":null,"15":null,"16":null,"17":null},{"0":null,"1":null,"2":null,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null,"13":null},{"0":null,"1":null,"2":null,"3":null,"4":null,"5":null},1
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: UPDATE "inventory_items" SET "pockets" = $1, "clothes" = $2, "quickUse" = $3 WHERE "id" = $4
+Parameters: {"0":null,"1":null,"2":null,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null,"13":null,"14":null,"15":null,"16":null,"17":null},{"0":null,"1":null,"2":null,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,"10":null,"11":null,"12":null,"13":null},{"0":null,"1":null,"2":null,"3":null,"4":null,"5":null},1
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: UPDATE "characters" SET "position" = $1, "lastlogin" = $2, "deathState" = $3, "cash" = $4 WHERE "id" IN ($5)
+Parameters: {"x":254.93780517578125,"y":-1044.276611328125,"z":29.3448486328125,"heading":79.18318176269531},Sun Dec 21 2025 18:13:34 GMT-0300 (GMT-03:00),0,1500,1
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT version();
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: START TRANSACTION
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_database()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "table_schema", "table_name" FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'vehicles') OR ("table_schema" = 'public' AND "table_name" = 'inventory_items') OR ("table_schema" = 'public' AND "table_name" = 'bank_accounts') OR ("table_schema" = 'public' AND "table_name" = 'player_jobs') OR ("table_schema" = 'public' AND "table_name" = 'characters') OR ("table_schema" = 'public' AND "table_name" = 'accounts') OR ("table_schema" = 'public' AND "table_name" = 'bans')
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT TRUE FROM information_schema.columns WHERE table_name = 'pg_class' and column_name = 'relispartition'
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT columns.*, pg_catalog.col_description(('"' || table_catalog || '"."' || table_schema || '"."' || table_name || '"')::regclass::oid, ordinal_position) AS description, ('"' || "udt_schema" || '"."' || "udt_name" || '"')::"regtype" AS "regtype", pg_catalog.format_type("col_attr"."atttypid", "col_attr"."atttypmod") AS "format_type" FROM "information_schema"."columns" LEFT JOIN "pg_catalog"."pg_attribute" AS "col_attr" ON "col_attr"."attname" = "columns"."column_name" AND "col_attr"."attrelid" = ( SELECT "cls"."oid" FROM "pg_catalog"."pg_class" AS "cls" LEFT JOIN "pg_catalog"."pg_namespace" AS "ns" ON "ns"."oid" = "cls"."relnamespace" WHERE "cls"."relname" = "columns"."table_name" AND "ns"."nspname" = "columns"."table_schema" ) WHERE ("table_schema" = 'public' AND "table_name" = 'vehicles') OR ("table_schema" = 'public' AND "table_name" = 'inventory_items') OR ("table_schema" = 'public' AND "table_name" = 'bank_accounts') OR ("table_schema" = 'public' AND "table_name" = 'characters') OR ("table_schema" = 'public' AND "table_name" = 'accounts') OR ("table_schema" = 'public' AND "table_name" = 'bans') OR ("table_schema" = 'public' AND "table_name" = 'player_jobs')
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "cnst"."conname" AS "constraint_name", pg_get_constraintdef("cnst"."oid") AS "expression", CASE "cnst"."contype" WHEN 'p' THEN 'PRIMARY' WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' END AS "constraint_type", "a"."attname" AS "column_name" FROM "pg_constraint" "cnst" INNER JOIN "pg_class" "t" ON "t"."oid" = "cnst"."conrelid" INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "cnst"."connamespace" LEFT JOIN "pg_attribute" "a" ON "a"."attrelid" = "cnst"."conrelid" AND "a"."attnum" = ANY ("cnst"."conkey") WHERE "t"."relkind" IN ('r', 'p') AND (("ns"."nspname" = 'public' AND "t"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'player_jobs'))
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "i"."relname" AS "constraint_name", "a"."attname" AS "column_name", CASE "ix"."indisunique" WHEN 't' THEN 'TRUE' ELSE'FALSE' END AS "is_unique", pg_get_expr("ix"."indpred", "ix"."indrelid") AS "condition", "types"."typname" AS "type_name" FROM "pg_class" "t" INNER JOIN "pg_index" "ix" ON "ix"."indrelid" = "t"."oid" INNER JOIN "pg_attribute" "a" ON "a"."attrelid" = "t"."oid"  AND "a"."attnum" = ANY ("ix"."indkey") INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "t"."relnamespace" INNER JOIN "pg_class" "i" ON "i"."oid" = "ix"."indexrelid" INNER JOIN "pg_type" "types" ON "types"."oid" = "a"."atttypid" LEFT JOIN "pg_constraint" "cnst" ON "cnst"."conname" = "i"."relname" WHERE "t"."relkind" IN ('r', 'p') AND "cnst"."contype" IS NULL AND (("ns"."nspname" = 'public' AND "t"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'player_jobs'))
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "con"."conname" AS "constraint_name", "con"."nspname" AS "table_schema", "con"."relname" AS "table_name", "att2"."attname" AS "column_name", "ns"."nspname" AS "referenced_table_schema", "cl"."relname" AS "referenced_table_name", "att"."attname" AS "referenced_column_name", "con"."confdeltype" AS "on_delete", "con"."confupdtype" AS "on_update", "con"."condeferrable" AS "deferrable", "con"."condeferred" AS "deferred" FROM ( SELECT UNNEST ("con1"."conkey") AS "parent", UNNEST ("con1"."confkey") AS "child", "con1"."confrelid", "con1"."conrelid", "con1"."conname", "con1"."contype", "ns"."nspname", "cl"."relname", "con1"."condeferrable", CASE WHEN "con1"."condeferred" THEN 'INITIALLY DEFERRED' ELSE 'INITIALLY IMMEDIATE' END as condeferred, CASE "con1"."confdeltype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confdeltype", CASE "con1"."confupdtype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confupdtype" FROM "pg_class" "cl" INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_constraint" "con1" ON "con1"."conrelid" = "cl"."oid" WHERE "con1"."contype" = 'f' AND (("ns"."nspname" = 'public' AND "cl"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'player_jobs')) ) "con" INNER JOIN "pg_attribute" "att" ON "att"."attrelid" = "con"."confrelid" AND "att"."attnum" = "con"."child" INNER JOIN "pg_class" "cl" ON "cl"."oid" = "con"."confrelid"  AND "cl"."relispartition" = 'f'INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_attribute" "att2" ON "att2"."attrelid" = "con"."conrelid" AND "att2"."attnum" = "con"."parent"
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: COMMIT
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT version();
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: START TRANSACTION
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_schema()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM current_database()
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "table_schema", "table_name" FROM "information_schema"."tables" WHERE ("table_schema" = 'public' AND "table_name" = 'vehicles') OR ("table_schema" = 'public' AND "table_name" = 'inventory_items') OR ("table_schema" = 'public' AND "table_name" = 'bank_accounts') OR ("table_schema" = 'public' AND "table_name" = 'player_jobs') OR ("table_schema" = 'public' AND "table_name" = 'characters') OR ("table_schema" = 'public' AND "table_name" = 'accounts') OR ("table_schema" = 'public' AND "table_name" = 'bans')
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT TRUE FROM information_schema.columns WHERE table_name = 'pg_class' and column_name = 'relispartition'
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT columns.*, pg_catalog.col_description(('"' || table_catalog || '"."' || table_schema || '"."' || table_name || '"')::regclass::oid, ordinal_position) AS description, ('"' || "udt_schema" || '"."' || "udt_name" || '"')::"regtype" AS "regtype", pg_catalog.format_type("col_attr"."atttypid", "col_attr"."atttypmod") AS "format_type" FROM "information_schema"."columns" LEFT JOIN "pg_catalog"."pg_attribute" AS "col_attr" ON "col_attr"."attname" = "columns"."column_name" AND "col_attr"."attrelid" = ( SELECT "cls"."oid" FROM "pg_catalog"."pg_class" AS "cls" LEFT JOIN "pg_catalog"."pg_namespace" AS "ns" ON "ns"."oid" = "cls"."relnamespace" WHERE "cls"."relname" = "columns"."table_name" AND "ns"."nspname" = "columns"."table_schema" ) WHERE ("table_schema" = 'public' AND "table_name" = 'vehicles') OR ("table_schema" = 'public' AND "table_name" = 'inventory_items') OR ("table_schema" = 'public' AND "table_name" = 'bank_accounts') OR ("table_schema" = 'public' AND "table_name" = 'characters') OR ("table_schema" = 'public' AND "table_name" = 'accounts') OR ("table_schema" = 'public' AND "table_name" = 'bans') OR ("table_schema" = 'public' AND "table_name" = 'player_jobs')
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "cnst"."conname" AS "constraint_name", pg_get_constraintdef("cnst"."oid") AS "expression", CASE "cnst"."contype" WHEN 'p' THEN 'PRIMARY' WHEN 'u' THEN 'UNIQUE' WHEN 'c' THEN 'CHECK' WHEN 'x' THEN 'EXCLUDE' END AS "constraint_type", "a"."attname" AS "column_name" FROM "pg_constraint" "cnst" INNER JOIN "pg_class" "t" ON "t"."oid" = "cnst"."conrelid" INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "cnst"."connamespace" LEFT JOIN "pg_attribute" "a" ON "a"."attrelid" = "cnst"."conrelid" AND "a"."attnum" = ANY ("cnst"."conkey") WHERE "t"."relkind" IN ('r', 'p') AND (("ns"."nspname" = 'public' AND "t"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'player_jobs'))
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "ns"."nspname" AS "table_schema", "t"."relname" AS "table_name", "i"."relname" AS "constraint_name", "a"."attname" AS "column_name", CASE "ix"."indisunique" WHEN 't' THEN 'TRUE' ELSE'FALSE' END AS "is_unique", pg_get_expr("ix"."indpred", "ix"."indrelid") AS "condition", "types"."typname" AS "type_name" FROM "pg_class" "t" INNER JOIN "pg_index" "ix" ON "ix"."indrelid" = "t"."oid" INNER JOIN "pg_attribute" "a" ON "a"."attrelid" = "t"."oid"  AND "a"."attnum" = ANY ("ix"."indkey") INNER JOIN "pg_namespace" "ns" ON "ns"."oid" = "t"."relnamespace" INNER JOIN "pg_class" "i" ON "i"."oid" = "ix"."indexrelid" INNER JOIN "pg_type" "types" ON "types"."oid" = "a"."atttypid" LEFT JOIN "pg_constraint" "cnst" ON "cnst"."conname" = "i"."relname" WHERE "t"."relkind" IN ('r', 'p') AND "cnst"."contype" IS NULL AND (("ns"."nspname" = 'public' AND "t"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "t"."relname" = 'player_jobs'))
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT "con"."conname" AS "constraint_name", "con"."nspname" AS "table_schema", "con"."relname" AS "table_name", "att2"."attname" AS "column_name", "ns"."nspname" AS "referenced_table_schema", "cl"."relname" AS "referenced_table_name", "att"."attname" AS "referenced_column_name", "con"."confdeltype" AS "on_delete", "con"."confupdtype" AS "on_update", "con"."condeferrable" AS "deferrable", "con"."condeferred" AS "deferred" FROM ( SELECT UNNEST ("con1"."conkey") AS "parent", UNNEST ("con1"."confkey") AS "child", "con1"."confrelid", "con1"."conrelid", "con1"."conname", "con1"."contype", "ns"."nspname", "cl"."relname", "con1"."condeferrable", CASE WHEN "con1"."condeferred" THEN 'INITIALLY DEFERRED' ELSE 'INITIALLY IMMEDIATE' END as condeferred, CASE "con1"."confdeltype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confdeltype", CASE "con1"."confupdtype" WHEN 'a' THEN 'NO ACTION' WHEN 'r' THEN 'RESTRICT' WHEN 'c' THEN 'CASCADE' WHEN 'n' THEN 'SET NULL' WHEN 'd' THEN 'SET DEFAULT' END as "confupdtype" FROM "pg_class" "cl" INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_constraint" "con1" ON "con1"."conrelid" = "cl"."oid" WHERE "con1"."contype" = 'f' AND (("ns"."nspname" = 'public' AND "cl"."relname" = 'vehicles') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'inventory_items') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'bank_accounts') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'characters') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'accounts') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'bans') OR ("ns"."nspname" = 'public' AND "cl"."relname" = 'player_jobs')) ) "con" INNER JOIN "pg_attribute" "att" ON "att"."attrelid" = "con"."confrelid" AND "att"."attnum" = "con"."child" INNER JOIN "pg_class" "cl" ON "cl"."oid" = "con"."confrelid"  AND "cl"."relispartition" = 'f'INNER JOIN "pg_namespace" "ns" ON "cl"."relnamespace" = "ns"."oid" INNER JOIN "pg_attribute" "att2" ON "att2"."attrelid" = "con"."conrelid" AND "att2"."attnum" = "con"."parent"
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: SELECT * FROM "information_schema"."tables" WHERE "table_schema" = 'public' AND "table_name" = 'typeorm_metadata'
+Parameters: undefined
+-------------------------------------------------------------------------
+-------------------------------------------------------------------------
+Query: COMMIT
+Parameters: undefined
+-------------------------------------------------------------------------

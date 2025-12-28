@@ -23,7 +23,7 @@ export async function setPlayerJob(character: CharacterEntity, jobId: number, ra
 }
 
 // Obtener job actual del jugador
-export async function getPlayerJob(character: CharacterEntity) {
+export async function getPlayerJob(character: CharacterEntity) { 
     const job = await jobRepo.findOne({ where: { character: { id: character.id } } });
     if (!job) return null;
 

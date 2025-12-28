@@ -20,8 +20,8 @@ moduleAlias.addAliases({
   "@commands": path.join(root, "commands"),
   "@prototype": path.join(root, "prototype"),
   "@shared": path.join(root, "../shared"),
-  "@jobs": path.join(root, "jobs"),
   "@map": path.join(root, "map"),
+ 
 });
 
 /* ===============================
@@ -61,9 +61,11 @@ require("@events/Death.event");
 require("@events/Vehicle.event");
 require("@events/Point.event");
 
+
 const _api_1 = require("@api");
 //---------------------------------------//
 const colorette_1 = require("colorette");
+const { map } = require("lodash");
 //---------------------------------------//
 async function initGamemode() {
     mp.events.delayInitialization = true;

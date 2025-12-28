@@ -26,6 +26,7 @@ import "@modules/IdleCamera.module";
 import "@prototype/Player.prototype";
 //-----------------------------------------//
 import { InteractablePed } from "@classes/InteractablePed.class";
+
 //-----------------------------------------//
 async function initClientSide() {
     mp.console.clear();
